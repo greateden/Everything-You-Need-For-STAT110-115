@@ -45,45 +45,75 @@
 \setcounter{page}{1}
 
 \pagestyle{fancy}
-\lhead{STAT110/115 Tutoring Materials }
+\lhead{STAT110/115 Tutoring Materials}
 \rhead{Terms}
-%\maketitle
 
 \begin{itemize}
-\item $\mu$: Population mean (mu).
-\item $\sigma$: Population standard deviation (sigma).
-\item $\pi$: Population proportion.
-\item $\hat{\mu}$: An estimate of the parameter $\mu$.
-\item $\bar{x}$: A statistic and an estimate (for STAT110/115 paper only).
-\item Proportion: Fraction of one quantity when compared to the whole.
-\item Ratio: Fraction given by one quantity over another. \\
-\textbf{N.B.}, both quantities have the same units.
-\item Rates (the difference between rates and ratio): Rates are like ratios for quantities with different units.
-\item Random variables are described by: Probability distributions.
-\item Observed values of random variables are: Data.
-\item Difference between random variables and observed/realised value: \\
-Random variables: unknown quantity varies unpredictably; \\
-Observed/realised value: got the actual quantity of the unknown quantity.
-\item Types of variables: 
-\begin{itemize}
-\item Continuous - can be expressed on a continuous scale in which every value is possible.
-\item Discrete - can be in one-to-one correspondence with the counting numbers.
-\item Categorical - restricted to one of a set of categories. For example 'Heads' or 'Tails'.
-\begin{itemize}
-\item type 1: 0 - 1 binary, A/B/O/AB more than two
-\item type 2: A/B/O/AB nominal, pass/fail ordinal
-\end{itemize}
-\end{itemize}
-\item Types of censored data: Right censored, Left censored, Interval-censored \\
-\textbf{N.B.}, censored data are categorised by two variables: the censor type and the censoring point or interval.
-\begin{itemize}
-\item Right censored: The true value is known to be larger than a recorded value. \\
-e.g., we know that someone lived until at least 31 Dec 2017. 50+
-\item Left censored: The true value is known to be smaller than a recorded value. \\
-e.g., we know that a measurement is less than a known limit of detection. 10-
-\item Interval-censored: The true value is known to lie between two values. \\
-e.g., we know the date of infection with HPV is after a negative test and before a positive test 2 years later.
-\end{itemize}
+  %----------------------------------------------------------
+  % Core population–sample concepts
+  %----------------------------------------------------------
+  \item \textbf{Population}: the entire group we want to learn about.
+  \item \textbf{Sample}: the subset of that population we actually observe.
+  \item \textbf{Parameter} (population quantity) vs.\ \textbf{Statistic} (sample-based estimate).
+
+  %----------------------------------------------------------
+  % Common symbols
+  %----------------------------------------------------------
+  \item $\mu$ - population mean \newline \quad\; $\sigma$ - population standard deviation \newline \quad\;
+        $\pi$ - population proportion.
+  \item $\bar{x}$ - sample mean \newline \quad\; $s$ - sample standard deviation \newline \quad\;
+        $\hat{p}$ - sample proportion.
+
+  %----------------------------------------------------------
+  % Proportion / ratio / rate
+  %----------------------------------------------------------
+  \item \textbf{Proportion}: fraction of the (sample or population) total in a given category
+        ($0 \le \hat{p} \le 1$).
+  \item \textbf{Ratio}: numerator and denominator have the \emph{same} units (e.g.\ waist/hip).
+  \item \textbf{Rate}: numerator and denominator have \emph{different} units
+        (e.g.\ km per hour; cases per 1,000 person-years).
+
+  %----------------------------------------------------------
+  % Random variables
+  %----------------------------------------------------------
+  \item \textbf{Random variable} $X$: an unknown quantity described by a probability distribution.
+  \item \textbf{Observed (realised) value} $x$: the concrete outcome recorded in the data.
+
+  %----------------------------------------------------------
+  % Variable types
+  %----------------------------------------------------------
+  \item \textbf{Variable types}
+        \begin{itemize}
+          \item \textbf{Quantitative}
+                \begin{itemize}
+                  \item \emph{Continuous}: can take any value on an interval
+                        (e.g.\ height, blood pressure).
+                  \item \emph{Discrete}: isolated values, usually counts
+                        (e.g.\ number of GP visits).
+                \end{itemize}
+          \item \textbf{Categorical}
+                \begin{itemize}
+                  \item \emph{Binary / dichotomous}: two categories
+                        (e.g.\ pass vs.\ fail).
+                  \item \emph{Nominal}: $\ge 2$ unordered categories
+                        (e.g.\ blood type A/B/O/AB).
+                  \item \emph{Ordinal}: ordered categories
+                        (e.g.\ pain score 0–10, Likert scale).
+                \end{itemize}
+        \end{itemize}
+
+  %----------------------------------------------------------
+  % Censored data – will be revisited in survival analysis weeks
+  %----------------------------------------------------------
+  \item \textbf{Censored data}
+        \begin{itemize}
+          \item \textbf{Right-censored}: true value is \emph{greater} than a known limit  
+                (e.g.\ patient still alive at study end; age $>90$).
+          \item \textbf{Left-censored}: true value is \emph{smaller} than a detection limit  
+                (e.g.\ viral load $<10$ copies/mL).
+          \item \textbf{Interval-censored}: true value lies between two known bounds  
+                (e.g.\ infection occurs between two clinic visits two years apart).
+        \end{itemize}
 \end{itemize}
 
 
