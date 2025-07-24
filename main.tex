@@ -11,6 +11,7 @@
 \usepackage{pgfplots}
 \usepackage{caption}
 \usepackage{xcolor}
+\usepackage{paralist}
 \usepackage{mdframed}
 \usepgfplotslibrary{fillbetween}
 \pgfplotsset{compat=1.18}
@@ -473,615 +474,625 @@ Meaning of the RR value: RR = 1 there is no association between outcome and expo
 To get the risk difference in terms of the number of cases per 1000 people, we need to multiply this answer by 1000. $$RD = \left(\frac{2341}{191678}-\frac{277}{68601}\right)*1000=8.175$$
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%STUDY DESIGN%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% DISTRIBUTIONS %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
 \pagestyle{fancy}
 \lhead{STAT110/115 Tutoring Materials}
-\rhead{Study Design}
-
-\begin{itemize}
-\item \textbf{Purpose of Analytic Studies}: To test hypotheses (quantify population). For example, do government subsidy programs impact the profitability of fisheries? Does IT investment impact productivity in industry? Does a Mediterranean diet impact life expectancy?
-\item \textbf{Function of Replication}: To allow us to separate out true effects from chance effects.
-\item \textbf{Function of Control}: Provides context for evaluating the effect of interest.
-\item \textbf{Descriptive Studies}: The characteristics of people with a disease (person; place; time); lifestyle patterns in a population; attitudes to health care.
-\item \textbf{Well-defined and Not Well-defined Population}:
-    \begin{itemize}
-    \item Well-defined: The collection of words in poems by W. B. Yeats. All patients diagnosed with colorectal cancer in New Zealand in 2015.
-    \item Not well-defined: The population of New Zealand. Right now? Past? Future?(Time). Target population for a particular cancer treatment. Which type/stage of cancer? Existing or future patients(time)? Over a certain age? On other medications?
-    \end{itemize}
-\item \textbf{Traits of Random Sampling}: Known-chance, Equal-chance. If doesn't have those traits, define the sample has representative or not.
-\item \textbf{Sampling Frame Definition}: List of all eligible sampling units from which the sample will be drawn. For example, to draw 200 out of 10,000 employees to form a sample, the roster of 10,000 employees, is the sampling frame. May be sourced from census, company data base or other secondary data. Completeness may be an issue when sourcing Sampling Frame. Sometimes need to use/combine multiple sample frames. Non-probability sampling techniques don't require a sampling frame.
-\item \textbf{Sources of Error for Sample Mean}:
-
-\begin{tikzpicture}
-\node (samplemean) at (0,0) {Sample mean};
-\node (equals) at (1.5,0) {=};
-\node [align=center](populationmean) at (3,0) {Population \\ (true) mean};
-\node (plus) at (4.6,0) {+};
-
-\node (error) at (5.5,0) {Error};
-
-\node[below of=error, align=center, xshift=-1cm, yshift=-0.5cm] (systematicerror) {Systematic \\ error};
-\node[right of=systematicerror, align=center, xshift=1cm] (randomerror) {Random \\ error};
-
-\draw[->] (error.south) -- ++(0,-0.5)-|  node[near start,below] {}(systematicerror.north);
-\draw[->] 	(error.south)-- ++(0,-0.5)-| node[near start,below] {}(randomerror.north);
-\end{tikzpicture}
-
-    \begin{itemize}
-    \item \textbf{Random Error}: Due to natural variability. Increasing the sample size will reduce the random fluctuations in the sample mean. Statistical methods allow us to quantify the influence of random error on our estimate.
-    \item \textbf{Systematic Error in a Descriptive Study (Bias)}: Due to aspects of the design or conduct of the study which systematically distort the results. Occurs if a sample is not representative of the population (Selection bias). Occurs if the information collected from the sample members is incorrect (Information bias). Cannot be reduced by increasing the sample size.
-    \end{itemize}
-\item \textbf{Probability Sampling}: We want our sampling frame to match the population of interest and provide a way to draw a sample. Probability sampling is important because it helps to justify the statistical models. For a finite population of size N draw a sample of size n such that each possible sample has the same probability of being selected.
-\item \textbf{Key Characteristic of Probability Sampling}: The key characteristic is that we know the probability of being selected for everyone in the sample frame.
-\item \textbf{Simplest Form of Probability Sampling}: Simple random sampling.
-\item \textbf{Types of Probability Sampling}: Simple random sampling, stratified random sampling, cluster sampling.
-\item \textbf{Traits of Simple Random Sampling}: Same chance of selection (e.g., Lotto).
-\item \textbf{Advantages of Stratified Sampling}: More precise estimate than for the same sample size from a simple random sample. Can take different-sized samples from different strata (a device for reducing overall variability). Useful if you are interested in the results for each stratum, and some of the strata are small. Example: colon cancer treatment, samples of colon cancer patients, stratified by ethnicity.
-\item \textbf{Types of Stratified Sampling}: Proportionate stratified sample, disproportionate stratified sample (equal number from each stratum).
-\item \textbf{Cluster Sampling}: The population may be composed of similar and naturally occurring groups. Dividing the population into a group/cluster (then selecting a sample from each cluster).
-\item \textbf{Types of Cluster Sampling}: One-stage, two-stage. Pros and cons for two-stage cluster sampling: reduce cost \& time, less precise.
-\item \textbf{Experimental Studies}: The researcher manipulates the conditions (intervenes in a natural process) and records the results. The aim is to control all other factors to isolate the effects of the intervention. Best way to study causation. Why randomisation? Randomisation can be used to ensure that the effects of unmeasured factors are equalised across the intervention and control groups. Why NOT experimental studies? Ethical problems.
-\item \textbf{Observational Studies}: The investigator does not intervene, simply observes a naturally occurring process, and collects information. The idea is to get as close as possible to the information that would have been obtained if the experimental study could have been done. Cons: We can't know the confounding factors.
-\item \textbf{Case Control Study}: Outcome trace back to reason.
-\item \textbf{Traits of Randomised Controlled Trial (RCT)}: 
-	\begin{itemize}
-	\item Is considered the "gold standard" analytic study.
-	\item \textbf{Randomisation} - or random allocation- is used to create two comparable groups, one that will have the placebo treatment and the other the experimental treatment. At the end of follow-up any difference between the groups can be attributed to the difference in treatment.
-	\item \textbf{Control group} - is used to isolate the effects of the intervention.
-	\end{itemize}
-\item \textbf{What is blinding?}: Blinding refers to not knowing whether the participant is in the intervention or the control group. Several people may be blinded to the allocation including the participants, the people caring for patients, the people measuring outcomes, and the lead researcher.
-\item \textbf{Pros and cons for RCT}
-    \begin{itemize}
-    \item Advantages: Experiment - the best way to test a hypothesis. If the trial is well conducted, differences in outcome can be attributed to the intervention.
-    \item Disadvantages: May not be ethical or feasible.
-    \end{itemize}
-\item \textbf{Example cohort study}: British doctors and smoking. Aim: to investigate the relationship between smoking and lung cancer.
-\item \textbf{Pros and cons for cohort study}:
-    \begin{itemize}
-    \item Pros: Clear chronological order from reason to outcome. Can evaluate the relationship between multiple results and factor(s).
-    \item Cons: Large time consumption. Bias affects. Small sample size.
-    \end{itemize}
-\item \textbf{Characteristics of a case-control study}: Generally carried out to test hypotheses. Participants are chosen on the basis of their outcome status: a group with the outcome (cases) and a group without (controls). Information is collected from people with and without outcomes about exposures that occurred in the past (retrospective). i.e. in general before disease was diagnosed.
-\item \textbf{Pros and cons for Case-control study}:
-    \begin{itemize}
-    \item Advantages: Relatively quick. Smaller than cohort studies, particularly for rare outcomes. Can examine the effects of multiple exposures.
-    \item Disadvantages: Events have already occurred, so the potential for bias is higher. It is very hard (if not impossible) to remove all the effects of confounding.
-    \end{itemize}
-\item \textbf{Sources of error in analytic studies}
-
-\begin{tikzpicture}[node distance=2cm]
-% Nodes
-\node (trueRR) [process, align=center, fill=blue!20] {True RR in the \\ population};
-\node (estimateRR) [process, align=center, fill=red!20, below of=trueRR, yshift=-2cm] {Estimate of RR \\ from the study \\ sample};
-\node (inference) [box, align=left, left of=trueRR, xshift=-3.1cm, yshift=-2cm] {Inference: \\ - Confounding \\ - Bias \\ - Chance (random variation)};
-\node (studyDesign) [right of=trueRR, align=center, xshift=1.8cm, yshift=-2cm] {Study design \\ and conduct};
-% Arrows
-\draw [arrow] (trueRR.west) to [bend right=45] (estimateRR.west);
-\draw [arrow] (estimateRR.east) to [bend right=45] (trueRR.east);
-\end{tikzpicture}
-
-\item \textbf{What is Confounding?}: Confounding is a distortion of the association between exposure and outcome caused by the presence of a third factor. A confounder is a variable which causes this distortion.
-\item \textbf{A variable must be both ( ) to become a confounder}:
-    \begin{itemize}
-    \item associated with the exposure (independent of outcome);
-    \item and associated with the outcome (independent of exposure).
-    \end{itemize}
-\item \textbf{Bias in an analytic study}:
-    \begin{itemize}
-    \item \textbf{Selection bias}: arising from the way participants are selected for inclusion in the study. In an analytic study, selection bias occurs if the selection processes cause a systematic difference between the groups of participants selected for the study. Prospective analytic studies rarely obtain participants through random sampling from a population. The issue of representativeness must be considered, but for analytic studies we consider it a generalisability issue rather than bias.
-    \item \textbf{Information bias}: arising from the way study information is obtained, interpreted and recorded. In an analytic study, information bias is a particular problem if there are systematic differences in the information obtained from groups under comparison in the study. Information bias may be introduced by the observer, the study individual (respondent), instruments used to collect the data (e.g., badly-designed questionnaire), or missing measurements (e.g., from loss to follow-up in a prospective study).
-    \end{itemize}
-\item \textbf{RCT, Cohort study, Case-control study}:
-    \begin{itemize}
-    \item \textbf{Randomised controlled trial}: Analytic, experimental, prospective.
-    \item \textbf{Cohort study}: Analytic, observational, usually prospective.
-    \item \textbf{Case-control study}: Analytic, observational, retrospective.
-    \end{itemize}
-\item \textbf{Summary for the classification}:
-
-\begin{tikzpicture}[node distance=2cm]
-
-\node (study) [startstop] {Aim of Study?};
-\node (desc) [process, below left of=study, xshift=-2cm] {Descriptive Study};
-\node (analytic) [process, below right of=study, xshift=2cm] {Analytic Study};
-\node (survey) [process, below of=desc] {Survey};
-\node (inter) [process, below of=analytic] {Researcher intervenes?};
-\node (exp) [startstop, below of=inter, xshift=-3cm] {Experimental};
-\node (obs) [startstop, below right of=inter, xshift=3cm, yshift=-0.5cm] {Observational};
-\node (rct) [process, below of=exp] {Randomised Controlled Trial};
-\node (dir) [process, below of=obs] {Direction?};
-\node (cohort) [process, below of=dir, yshift=-1cm] {Case-control (Retrospective)};
-\node (casecontrol) [process, left of=cohort, xshift=-3cm] {Cohort (Prospective)};
-
-\draw [arrow] (study) -- node[anchor=east] {Describe population?}(desc);
-\draw [arrow] (study) -- node[anchor=west] {Quantify population?}(analytic);
-\draw [arrow] (desc) -- (survey);
-\draw [arrow] (analytic) -- (inter);
-\draw [arrow] (inter) -- node[anchor=east] {Yes} (exp);
-\draw [arrow] (inter) -- node[anchor=north] {No} (obs);
-\draw [arrow] (exp) -- (rct);
-\draw [arrow] (obs) -- (dir);
-\draw [arrow] (dir) -- node[anchor=west, align=center] {Outcome \\ → Exposure} (cohort);
-\draw [arrow] (dir) -- node[anchor=north] {Exposure → Outcome} (casecontrol);
-
-\end{tikzpicture}
-
-    \begin{itemize}
-    \item \textbf{Discrete}: A type of variable that can only take on specific values. These values are typically whole numbers or counts and cannot be subdivided further. For example, the number of children in a family is a discrete variable because it can only be a whole number (e.g., 1, 2, 3, etc.).
-    \item \textbf{Categorical}: Represent data that falls into specific categories or groups. The categories in nominal variables do not have any inherent order or ranking. Examples of nominal variables include gender (e.g., male, female), eye colour (e.g., blue, brown, green), or types of fruit (e.g., apple, banana, orange).
-    \item \textbf{Continuous}: Measurements that can take on any value within a specific range. They can be subdivided infinitely, and there are no gaps or interruptions in the possible values. Examples of continuous variables include height, weight, temperature, and time. These variables are often represented by real numbers and can include decimal values.
-    \item \textbf{Ordinal}: Similar to categorical variables, but they have an inherent order or ranking associated with their categories. The order represents the relative magnitude or importance of the categories, but the actual differences between the categories may not be uniform or measurable. Examples of ordinal variables include educational attainment (e.g., high school, bachelor's, master's, Ph.D.), socioeconomic status (e.g., low, medium, high), or survey ratings (e.g., strongly agree, agree, neutral, disagree, strongly disagree).
-    \item \textbf{If a data set is Categorical, must it also be Nominal?}: No. All nominal data is categorical data, but not all categorical data is nominal data. Nominal data refers specifically to categorical data without any order or hierarchy.
-    \end{itemize}
-\item \textbf{Types of data}
-
-
-\begin{tikzpicture}[node distance=2cm]
-
-\node (start) [startstop] {Types Of Data};
-\node (cat) [process, align=center, below left of=start, xshift=-2cm] {Qualitative \\ (Categorical Data)};
-\node (quant) [process, below right of=start, xshift=2cm] {Quantitative};
-\node (nominal) [process, below of=cat, xshift=-1.8cm] {Nominal data};
-\node (ordinal) [process, below of=cat, xshift=1.8cm] {Ordinal Data};
-\node (discrete) [process, below of=quant, xshift=-1.8cm] {Discrete Data};
-\node (continuous) [process, below of=quant, xshift=1.8cm] {Continuous Data};
-
-\draw [arrow] (start) -- (cat);
-\draw [arrow] (start) -- (quant);
-\draw [arrow] (cat) -- (nominal);
-\draw [arrow] (cat) -- (ordinal);
-\draw [arrow] (quant) -- (discrete);
-\draw [arrow] (quant) -- (continuous);
-
-\end{tikzpicture}
-
-\item \textbf{How to identify whether a study uses probability sampling?}: To find sampling frame.
-\item \textbf{Note for Stratified sampling}: Stratified sampling involves dividing the population into distinct subgroups (strata) based on certain characteristics.
-\item \textbf{Why Non-response can cause bias in surveys?}: because non-respondents tend to(maybe) behave differently compared to people who respond.
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%CI%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\pagestyle{fancy}
-\lhead{STAT110/115 Tutoring Materials }
-\rhead{Confidence Interval}
-
-\begin{itemize}
-\item \textbf{The standard normal critical value for a 95\% interval}: 1.96
-\item \textbf{Confidence interval formula}: $$\bar{x} \pm Z_{(1-\frac{\alpha}{2})} \times \frac{\sigma_X}{\sqrt{n}}$$
-estimate for the mean ± multiplier ± standard error for the mean
-\item \textbf{The standard normal critical value for a 99\% interval}: 2.58
-\item \textbf{Multiplier formula}: $$z = \frac{x - \textbf{mean}}{\textbf{sd}}$$
-\item \textbf{What is the $\alpha$ in the multiplier}: tail probability
-\item \textbf{Multiplier pattern}: when CI is bigger (e.g., 95\% to 99\%), the multiplier will be bigger
-\item \textbf{$s_X$}: sample standard deviation
-\item \textbf{In practice the true standard deviation $\sigma_X$ is not known}: We estimate it with the sample standard deviation.
-\item \textbf{This means our critical values must now come from the 't' distribution, not the standard normal}.
-\item \textbf{$t$ distribution CI}: $$\bar{x} \pm t_{(1-\frac{\alpha}{2}, \nu)} \times \frac{sX}{\sqrt{n}}$$
-\item \textbf{$\nu$ (degree of freedom) for t-distribution}: $\nu = n - 1$
-\item \textbf{The t-distribution will be the correct sampling distribution if}: either the underlying distribution of X is normal, and/or the sample size is sufficiently large (Central Limit Theorem holds).
-\item \textbf{What is the degree of freedom in t-distribution}: to replace the mean and sd in a normal distribution (because t-distribution is always standardised)
-\item \textbf{When to use t-distribution}: when the sample size is small
-\item \textbf{Calculate the estimate sample size when knows the CI}: assuming knows the sd and mean (normally given in the question), solve the equation, rounding UP
-\item \textbf{Comparing means with CI}: $$(\bar{x}_1 - \bar{x}_2) \pm t_{(1-\frac{\alpha}{2}, \nu)} \times \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
-\item \textbf{Using CLT to test appropriate normal distribution}: $$n\pi \pm 3 \sqrt{n\pi (1 - \pi)}$$
-gives two values between 0 and n, if not, then fails the test. This approximation is good only when: n is large, $\pi$ is not close to 0 or 1 (this increases symmetry)
-\item \textbf{Formula for estimating $\pi$}: $$P = \frac{X}{n}$$, $$p = \frac{x}{n}$$, x is the observed value of X. (and more) Using the Central Limit Theorem, the resulting distribution of these proportions is approximately normal if, n is large enough, $\pi$ far enough from 0 or 1. As before, we judge this using: $$n\pi \pm \sqrt{n\pi(1 - \pi)}$$ gives values between 0 and n.
-\item \textbf{Derivation of the mean of the sampling distribution}: If \(P = \frac{X}{n}\), then \(\mu_P = \pi\), \textbf{sd} = \(\sigma_P = \sqrt{\frac{\pi(1 - \pi)}{n}}\)
-\item \textbf{95\% confidence interval for $\pi$} (use the sample proportion (p) to estimate the unknown true population proportion ($\pi$)): $$p \pm 1.96 \sqrt{\frac{p(1 - p)}{n}}$$
-\item \textbf{Margin of error}: $$multipliers * sd$$
-\item \textbf{Note for CI}: This confidence interval (and margin of error) is correct only if the normal approximation to the binomial is appropriate. In practice, bias due to non-response should also be considered in our interpretation of an estimate.
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%DISTRIBUTIONS%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-
-\pagestyle{fancy}
-\lhead{STAT110/115 Tutoring Materials }
 \rhead{Distributions}
-%\maketitle
 
 \begin{itemize}
-\item \textbf{Mean of the binary (Bernoulli) distribution}: $$\mu = p$$
-\item \textbf{Variance of the binary (Bernoulli) distribution}: $$\sigma^2 = p (1 - p)$$
-\item \textbf{Difference between binary distribution and binomial distribution}: $$n = 1 \Rightarrow binary \ distribution$$
-$$n > 1 \Rightarrow binomial \ distribution$$
-\textbf{Mean of the binomial distribution}:$$\mu=np$$
-\textbf{Variance of the binomial distribution}:$$\sigma^2 = np(1-p)$$
-\item \textbf{Conditions for binomial distribution}: Outcome is binary. We have n independent trials. The number of trials is fixed. The probability of success $\pi$ must stay constant.
-\item \textbf{Probability of x successes in n trials}: $$ \Pr(X = x) = \binom{n}{x} \pi^x (1 - \pi)^{n - x} $$
-\item Binomial coefficient ($\binom{n}{k}$): $$\frac{n!}{(k!)(n-k)!}$$
-\textbf{Standard normal distribution(Z)}:$$Z \sim N (\mu = 0 ,\sigma^2 = 1)$$
-\item \textbf{$\mu$ (normal distribution) moves the curve but does not change its shape}.
-\item \textbf{$\sigma$ spreads the curve more widely about X = $\mu$ but does not alter the centre}.
-\item \textbf{Compare a relative frequency histogram with a probability distribution}: Relative frequency histogram represents a sample (smaller number of individuals). The probability density function represents a population (a large number of individuals).
-\item \textbf{How to estimate the value of the parameters if estimating a probability distribution curve from a relative frequency histogram}: $\mu$ is estimated by the sample mean. $\sigma$ is estimated by the sample standard deviation, s.
-\item \textbf{What do the areas under the normal distribution curve represent? Probabilities}.
-\item \textbf{What is Z-score (Z-value)? Number of standard deviations away from the mean}.
-\item Any normal distribution value, \textbf{$X \sim N(\mu_X , \sigma^2_X)$}, can be put on the standard normal scale, \textbf{$Z \sim N(0, 1)$}. The Z-score follows a standard normal distribution.
-\item \textbf{Formula for Z-Value}: $$Z = \frac{(X - \mu_X)}{\sigma_X}$$
-\item \textbf{When will the sampling distribution of the mean will follow a normal distribution? If x(the samples, not X) is large enough}.
-\item \textbf{Central Limit Theorem (CLT)}: The sampling distribution derived from a simple random sample will be approximately normally distributed.
-\item \textbf{What is the mean of the sampling distribution? Population mean}, \textbf{$\mu_{\bar{X}} = \mu_X$}.
-\item \textbf{Variance of the sampling distribution}: $$\sigma_{\bar{x}} = \frac{\sigma_x}{\sqrt{n}}$$
-The variability of sample means.
-\item \textbf{Notes on the sampling distribution}: If sample size n is greater, then the standard error of the mean is smaller (more compact distribution, greater precision). If X is normal, then $X_{bar}$ is normal (for any n). If X is not normal, then $X_{bar}$ is approximately normal for large n (central limit theorem).
+
+% ------------------------------------------------------------
+% 1. Discrete distributions
+% ------------------------------------------------------------
+\item \textbf{Bernoulli} ($X\sim\text{Bern}(p)$)\,: one trial, outcome 0/1
+      \[
+        E(X)=p, \qquad \operatorname{Var}(X)=p(1-p)
+      \]
+
+\item \textbf{Binomial} ($X\sim\text{Bin}(n,p)$)\,: $n$ independent Bernoulli trials
+      \[
+        E(X)=np, \qquad \operatorname{Var}(X)=np(1-p)
+      \]
+      \[
+        P(X=x)=\binom{n}{x}p^{\,x}(1-p)^{\,n-x}
+      \]
+      \textit{Conditions:} binary outcome, fixed $n$, independent trials, $p$ constant.
+
+% ------------------------------------------------------------
+% 2. Continuous distributions
+% ------------------------------------------------------------
+\item \textbf{Normal family}\,: $X\sim N(\mu,\sigma^2)$  
+      \begin{compactitem}
+        \item Changing $\mu$ shifts the curve; changing $\sigma$ stretches / shrinks it.
+        \item Standard normal: $Z\sim N(0,1)$.
+        \item Convert any normal value to a $Z$–score:  
+              $Z=(X-\mu)/\sigma$.
+      \end{compactitem}
+
+\item \textbf{$t$–distribution}\,: $T_\nu$ has thicker tails than $N(0,1)$;  
+      use when population $\sigma$ is unknown and sample size is moderate / small.  
+      As $\nu\to\infty$, $T_\nu\to N(0,1)$.
+
+\item \textbf{$\chi^2$ \& $F$}\,: arise from squared $Z$’s and variance ratios;  
+      used later for goodness-of-fit, contingency tables, and ANOVA.
+
+% ------------------------------------------------------------
+% 3. Sampling distribution of the mean
+% ------------------------------------------------------------
+\item \textbf{Central Limit Theorem (CLT)}  
+      For a simple random sample of size $n$, the \emph{sampling distribution}
+      of $\bar{X}$ is \emph{approximately} normal for “large enough” $n$
+      (rule-of-thumb $n\ge 30$ if the parent distribution is not too skew).
+
+\item Mean and variance of $\bar{X}$:
+      \[
+        E(\bar{X})=\mu, \qquad
+        \operatorname{Var}(\bar{X})=\frac{\sigma^{2}}{n}, \qquad
+        \text{SE}(\bar{X})=\frac{\sigma}{\sqrt{n}}
+      \]
+
+\item \textbf{Key take-away}\,: bigger $n\;\Rightarrow\;$ smaller SE $\;\Rightarrow\;$ more precise estimate of $\mu$.
+
+% ------------------------------------------------------------
+% 4. Linking histogram ↔ distribution
+% ------------------------------------------------------------
+\item A \emph{relative-frequency histogram} shows sample data; a \emph{probability
+      density function} describes the population.  
+      Estimate parameters by $\hat{\mu}=\text{sample mean}$ and
+      $\hat{\sigma}=\text{sample sd}$.
+
 \end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%REGRESSION%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% CONFIDENCE INTERVALS %%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials}
+\rhead{Confidence Intervals}
 
+\begin{itemize}
+
+% ------------------------------------------------------------
+% 1. Concept
+% ------------------------------------------------------------
+\item \textbf{Goal}: give a plausible range for a population parameter  
+      (mean $\mu$, proportion $\pi$, RR, OR, …) based on a random sample.
+
+% ------------------------------------------------------------
+% 2. One–sample mean, $\sigma$ known  (rare in real life)
+% ------------------------------------------------------------
+\item 95\,\% CI when population standard deviation is \emph{known}:
+      \[
+        \bar{x}\;\pm\;1.96\;
+        \frac{\sigma}{\sqrt{n}}
+      \]
+      \emph{General form:} estimate $\pm$ multiplier $\times$ standard error.
+
+% ------------------------------------------------------------
+% 3. One–sample mean, $\sigma$ unknown  (typical)
+% ------------------------------------------------------------
+\item Replace $\sigma$ by sample $s$ and use the \emph{$t$-distribution}:
+      \[
+        \bar{x}\;\pm\;t_{1-\alpha/2,\;\nu}\;
+        \frac{s}{\sqrt{n}},\qquad
+        \nu=n-1
+      \]
+      • Works if data are (approximately) normal, \textit{or} $n\ge 30$ (CLT).
+
+\item \textbf{99\,\% vs.\ 95\,\%}: larger confidence level $\uparrow$  
+      $\Rightarrow$ larger critical value ($1.96\to2.58$)  
+      $\Rightarrow$ wider interval.
+
+% ------------------------------------------------------------
+% 4. Two independent means
+% ------------------------------------------------------------
+\item \textbf{Difference of means} ($\mu_1-\mu_2$):
+      \[
+        (\bar{x}_1-\bar{x}_2)\;\pm\;
+        t_{1-\alpha/2,\;\nu}\;
+        \sqrt{\frac{s_1^{2}}{n_1}+\frac{s_2^{2}}{n_2}}
+      \]
+      Use Welch’s $\nu$ (software handles this).
+
+% ------------------------------------------------------------
+% 5. Single proportion
+% ------------------------------------------------------------
+\item Sample proportion: $\hat{p}=x/n$.
+      \[
+        \hat{p}\;\pm\;1.96\,
+        \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+      \]
+      \textit{Conditions}: $n\hat{p}\ge 10$ and $n(1-\hat{p})\ge 10$  
+      (ensures normal approximation to binomial).
+
+% ------------------------------------------------------------
+% 6. Margin of error \& planning sample size
+% ------------------------------------------------------------
+\item \textbf{Margin of error (ME)} $=\;$ multiplier $\times$ SE.  
+      Desired ME $\Rightarrow$ solve for $n$:
+      \[
+        n=\left(\frac{z_{1-\alpha/2}\,\sigma}{\text{ME}}\right)^{2},
+        \qquad\text{round up}.
+      \]
+
+% ------------------------------------------------------------
+% 7. Interpretation pitfalls
+% ------------------------------------------------------------
+\item 95\,\% CI means: “If we \emph{repeated} this study many times,
+      95\,\% of the calculated intervals would contain the true parameter.”
+      It does \underline{not} say the parameter itself is random.
+
+\item Wider interval $\Leftrightarrow$ more uncertainty  
+      (small $n$, large $s$) – always report $n$ alongside the CI.
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% HYPOTHESIS TESTING %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials}
+\rhead{Hypothesis Testing}
+
+\begin{itemize}
+  \setlength{\itemsep}{6pt} %←可自行调小/大
+
+  %----------------------------------------------------------
+  % 1. Hypotheses
+  %----------------------------------------------------------
+  \item \textbf{Null hypothesis} ($H_{0}$): no effect / no difference / no association.
+  \item \textbf{Alternative hypothesis} ($H_{A}$): there \emph{is} an effect / difference / association.
+
+  %----------------------------------------------------------
+  % 2. Test statistic template
+  %----------------------------------------------------------
+  \item \textbf{Generic test statistic}
+        \[
+          \frac{\text{estimate} - \text{null value}}{\text{standard error}}
+        \]
+        \begin{itemize}
+          \setlength{\itemsep}{0pt}
+          \item Use $Z$ when $\sigma$ known or $n$ large ($\ge 30$).
+          \item Use $t$ (df $=n-1$) when $\sigma$ unknown and sample moderate / small.
+        \end{itemize}
+
+  %----------------------------------------------------------
+  % 3. $p$-value & rule
+  %----------------------------------------------------------
+  \item \textbf{$p$-value}: probability of obtaining the test statistic
+        (or more extreme) if $H_{0}$ is true.  
+        Reject $H_{0}$ when $p<\alpha$ (convention $\alpha=0.05$).
+
+  %----------------------------------------------------------
+  % 4. Five-step recipe
+  %----------------------------------------------------------
+  \item \textbf{Five-step workflow}  
+        \begin{enumerate}
+          \setlength{\itemsep}{2pt}
+          \item State $H_{0}$ and $H_{A}$ (specify one- or two-sided).
+          \item Compute test statistic ($Z$ or $t$).
+          \item Find $p$-value.
+          \item (Optional) Build $(1-\alpha)$ CI — cross-checks decision.
+          \item Conclude in plain language.
+        \end{enumerate}
+
+  %----------------------------------------------------------
+  % 5. Errors & power
+  %----------------------------------------------------------
+  \item \textbf{Errors \& power}
+        \begin{itemize}
+          \setlength{\itemsep}{0pt}
+          \item Type I ($\alpha$): reject a true $H_{0}$ — false positive.
+          \item Type II ($\beta$): fail to reject a false $H_{0}$ — false negative.
+          \item Power $=1-\beta$ — boosted by larger $n$ or bigger effect size.
+        \end{itemize}
+
+  %----------------------------------------------------------
+  % 6. Quick guide table
+  %----------------------------------------------------------
+  \item \textbf{Common two-sample tests}
+        \[
+        \begin{array}{lcc}
+        \hline
+        \text{Scenario} & \text{Test} & \text{R command} \\\hline
+        \text{Means, indep.} & t\text{-test (Welch)} & \verb|t.test(y ~ g)|\\
+        \text{Means, paired} & \text{Paired }t\text{-test} & \verb|t.test(b, a, paired=TRUE)|\\
+        \text{Proportions} & Z\text{-test} & \verb|prop.test(x, n)| \\\hline
+        \end{array}
+        \]
+
+  %----------------------------------------------------------
+  % 7. Chi-square test (categorical × categorical)
+  %----------------------------------------------------------
+  \item \textbf{$\chi^{2}$ test for independence}
+        \begin{enumerate}
+          \setlength{\itemsep}{2pt}
+          \item $H_{0}$: variables independent; $H_{A}$: associated.
+          \item Compute expected counts: $E_{ij}=r_{i}c_{j}/n$.
+          \item $\displaystyle\chi^{2}=\sum\frac{(O_{ij}-E_{ij})^{2}}{E_{ij}}$.
+          \item df $=(r-1)(c-1)$; get $p$ with \verb|pchisq(..., lower.tail=FALSE)|.
+          \item If any $E_{ij}<5$, use \verb|fisher.test| instead.
+        \end{enumerate}
+
+  %----------------------------------------------------------
+  % 8. CI ↔ hypothesis test
+  %----------------------------------------------------------
+  \item \textbf{CI vs.\ test linkage:}  
+        At the same $\alpha$, a two-sided test and its CI agree:  
+        CI excludes null value $\Leftrightarrow$ reject $H_{0}$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% REGRESSION %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
 \graphicspath{{./regressionPic/}}
 \pagestyle{fancy}
 \lhead{STAT110/115 Tutoring Materials}
 \rhead{Regression}
-%\maketitle
 
 \begin{itemize}
-\item \textbf{Types of regression}: Linear (continuous data), Logistic (categorical data), Cox (categorical data in a survival analysis).
-\item \textbf{Explanatory variable (X)}: Also known as a covariate, predictor, or independent variable.
-\item \textbf{Outcome variable (Y)}: Also known as response or dependent variable.
-\item \textbf{Simple Linear Regression (SLR)}: Looks at a relationship between two continuous variables where the relationship between the two variables is approximately a straight line.
-\item \textbf{SLR equation}: $$Y = \beta_0 + \beta_1x + e$$
-\begin{itemize}
-\item This implies that the mean response is related to x by $$\mu_Y = \beta_0 + \beta_1x$$
-\item \textbf{Y} is the numerical outcome variable (continuous or approximately so).
-\item \textbf{x} is the explanatory variable.
-\item \textbf{$\beta_0$} is the intercept or constant (where the line crosses the y-axis).
-\item \textbf{$\beta_1$} is the slope of the line.
-\item \textbf{e} (often denoted $\epsilon$) is the random error or residual term.
-\end{itemize}
-\item \textbf{SLR equation for estimating:}
-$$\hat{y}=\hat{\beta}_0+\hat{\beta}_1x$$
-\item \textbf{Residual ('estimated error') term}: $$\hat{e_i} = y_i - \hat{y_i}$$
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.2\textwidth]{92.png}
-\end{figure}
-\item \textbf{How to find regression line}: The line of best fit minimises the sum of the squares of the residuals.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\textwidth]{1.png}
-\end{figure}
-\item \textbf{Equation for how to find regression line}:
-$$\sum_{i=1}^{n}\hat{e}^2_i = \sum_{i=1}^{n}(y_i - \hat{y}_i )^2$$
-\item \textbf{How to calculate $\beta_1$ and $\beta_0$}: 
-$$\hat{\beta}_1 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}$$
-$$\hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}$$
-\item \textbf{Example for how to calculate regression (Stress and Blood Pressure)}:
-\begin{itemize}
-\item Get n, n = 6
-\item Find the explanatory and outcome 
-\item Calculate $\beta_1$ and $\beta_0$
-\item Get the regression equation
-\item Using R for SLR
-\end{itemize}
-\item \textbf{Assumptions for Simple Linear Regression (LINE)}:
-\begin{itemize}
-\item Linearity: The relationship between the mean response $\mu_Y$ and x is described by a straight line.
-\item Independence: The responses $Y_1,Y_2, . . . ,Y_n$ are statistically independent.
-\item Normality: The error terms $e_1, e_2, . . . , e_n$ come from a normal distribution.
-\item Equal variance: The error terms all have the same variance, $\sigma^2$ ('homoscedastic').
-\end{itemize}
-\item \textbf{What diagram is used for checking linearity}: Residual plot.
-$$\hat{e}_i = y_i - \hat{y}_i = y_i - (\hat{\beta}_0 + \hat{\beta}_1 x_i) = y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i$$
-\item \textbf{Failure of linearity assumption}: 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{2.png}
-\end{figure}
-\item \textbf{Linearity assumption holds}: 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{3.png}
-\end{figure}
-\item \textbf{Checking independence assumption}: May get insight by thinking about the study design (Ask yourself questions).
-\item \textbf{Plot for Checking the normality assumption}: Q - Q plot.
-\item \textbf{Pass of normality assumption}: 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{4.png}
-\end{figure}
-\item \textbf{Fail of normality assumption}: 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{5.png}
-\end{figure}
-\item \textbf{Checking equal variance assumption (homoscedasticity)}: Pass if the residual plot is not like this.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{6.jpg}
-\end{figure}
-\item \textbf{What is the impact if Fail of the linearity assumption}: Critical. If that assumption fails, all conclusions drawn from the model will be invalid.
-\item \textbf{What is the impact if Fail of independence or equal variance assumptions}: Remain valid. However, estimates can be inefficient. Follows that the fitted regression line is useable. Any test results or confidence intervals based on the regression model will be invalid.
-\item \textbf{What is the impact if Fail of normality assumption}: Typically least important. Effects validity of confidence intervals and test results when the sample size n is small.
-\item \textbf{What to do with outliers}: The first thing to do is check that the data are correctly recorded. If data cannot be corrected, try refitting regression with outliers removed, but still investigate the cause of outliers - may be very important.
-\item \textbf{Estimate of error variance}: 
-$$S^2_e = \frac{1}{n-2}\sum_{i=1}^{n}(\hat{e}^2_i)=\frac{RSS}{n-2}$$
-$$where \ RSS = \sum_{i=1}^{n}\hat{e}^2_i \ is \ the \ residual \ sum \ of \ squares.$$
-\item \textbf{Degree of freedom for SLR's CI}: v = n - 2 because there're two parameters.
-\item \textbf{What is the multiplier for SLR's CI}: 
-$$t = \frac{estimate - null}{std. error}$$
-\item \textbf{What is the SE for SLR's CI}:
-$$s_{\hat{\beta}_1} = \frac{s_e}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}}$$
-\item \textbf{Using R to find SLR's CI}: 
-\begin{mdframed}[backgroundcolor=gray!15, linecolor=black]
-\begin{verbatim}
-> confint(model1)
-                 2.5 %     97.5 %
-(Intercept) 24.8300345 62.4009555
-X            0.2557407  0.7284774
-\end{verbatim}
-\end{mdframed}
-\item \textbf{$\beta_1 = 0$ indicates what}: That the response is not (linearly) related to the predictor. So the estimated slope will (almost) always be non-zero: $\hat{\beta_1} \neq 0$.
-\item \textbf{Steps to test to assess the strength of evidence in the data for $\beta_1 \neq 0$}:
-\begin{itemize}
-\item Setting up the hypotheses: $H_0 : \beta_1 = 0$, $H_A : \beta_1 \neq 0$.
-\item Calculating The test statistic
-$$t = \frac{\hat{\beta}_1}{s_{\hat{\beta}_1}}$$
-\item Computing the p-value
-\item Draw conclusion with rejecting or not $H_0$
-\end{itemize}
-\item \textbf{When predicting the data}: Ignore $e_0$.
-\item \textbf{Why not recommend extrapolating when predicting data}: The plot may not be linear.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{7.jpg}
-\end{figure}
-\item \textbf{Prediction error}: The prediction error is analogous to a standard error, but takes account of both sources of uncertainty. For prediction at $x_0$, the prediction error is: 
-$$PE(\hat{y}_0) = s_e\sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}}$$
-\item \textbf{Prediction interval formula}:
-$$\hat{y}_0 \pm t_{(1-\frac{\alpha}{2}, n-2)} \times PE(\hat{y}_0)$$
-\item \textbf{Correlation coefficient (r)}: Summarises the strength of a linear relationship between variables. It is a measure of linear association between variables. It describes both the strength and direction of the relationship.
-$$r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2 \sum_{i=1}^{n}(y_i - \bar{y})^2}}$$
-\begin{itemize}
-\item \textbf{r} $\in [-1, 1]$. A positive value of r means that Y and X increase together. A negative value of r means that as X increases, Y decreases (and vice-versa). 
-\item The strength of the linear relationship increases as r tends towards 1 or -1. r = 0 corresponds to no linear relationship between the variables.
-\end{itemize}
-\item \textbf{Scatterplots for r}: 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{8.png}
-\end{figure}
-\item \textbf{Re-write for r}: $s_x$ and $s_y$ are sample standard deviations for x and y variables. $s_{xy}$ is the sample covariance between x and y.
-$$= \frac{S_{xy}}{S_x S_y}$$
-\item \textbf{Correlation coefficient versus regression models}: The correlation coefficient is a summary of the data. Unlike linear regression, the correlation coefficient does not specify a model for the data, and cannot (for example) be used for prediction. The correlation coefficient is symmetric in the variables. That is, the correlation between x and y is the same as the correlation between y and x. In regression, the variables are not handled symmetrically. Regression models look at variation in Y for fixed values of x.
-\item \textbf{Coefficient of determination ($R^2$)}: $R^2$, is a measure of how well a regression model describes the data. $R^2$ is the squared correlation between the observed and predicted responses. $R^2 \in [0, 1]$.
-\item \textbf{Meaning for the value of $R^2$}: A high value of $R^2$ (close to 1) indicates a regression model that describes the data very well. Conversely, a low value of $R^2$ (close to 0) indicates a regression that describes the data poorly.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{9.png}
-\end{figure}
-\item \textbf{What describes the overall variation in the response variable?}: Total sum of squares.
-$$TSS = \sum_{i=1}^{n} (y_i - \bar{y})^2$$
-\item \textbf{What describes the total variation of the data points about the regression line?}: Residual sum of squares (RSS can be thought of as variation not explained by the regression model).
-$$RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
-\item \textbf{What describes as the amount of variation in the response that is explained by the regression model?}: Explained sum of squares.
-$$ESS = TSS - RSS$$
-\item \textbf{Equation of $R^2$}: 
-$$R^2 = \frac{ESS}{TSS} = 1 - \frac{RSS}{TSS}$$
-\item \textbf{Correlation does not equal causation}: e.g., just because there's more ice cream in the summer and more drowning in the summer doesn't mean there's a link between ice cream and drowning.
-\item \textbf{Logistic regression}: Outcome variable is binary.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{91.png}
-\end{figure}
-\item \textbf{Equation for logistic regression}: 
-$$logit(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1x$$
-$Y$ is the binary outcome variable, $Y = 1$ or $Y = 0$ for each observation. $p$ is the probability that specified category will occur; i.e. $p = Pr(Y = 1)$. $x$ is the explanatory variable. Parameters $\beta_0$, $\beta_1$ are the regression coefficients. $\beta_0$ is intercept and $\beta_1$ slope 'on the logit scale'. In the formula, log is the natural logarithm (log to base e).
-\item \textbf{Which technique do we use when estimating the regression coefficients?}: Maximum likelihood estimation.
-\item \textbf{What will increase x by one unit result in?}: A multiplicative change of $e^{\beta_1}$ to the odds.
-\item \textbf{Formula for logistic curve for the probability p}: 
-$$p = \frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}$$
-\item \textbf{Testing in logistic regression}:
-\begin{itemize}
-\item Define the hypotheses: $H_0 : \beta_1 = 0$ and $H_A : \beta_1 \neq 0$.
-\item The test statistic is: 
-$$z = x\frac{\hat{\beta}_1}{s_{\hat{\beta}_1}}$$
-\item Get the corresponding p-value.
-\item Reject/not reject $H_0$.
-\item Conclusion.
-\end{itemize}
-\item \textbf{Multiple regression model}:
-$$Y = \beta_0 + \beta_1x_1 + \cdots + \beta_kx_k + e$$
-\item \textbf{Mean value of the Multiple regression model}: 
-$$\mu_Y = \beta_0 + \beta_1x_{1} + \cdots + \beta_kx_{k}$$
-\item \textbf{Applications of multiple regression}:
-\begin{itemize}
-\item Adjusting for the effect of confounding variables.
-\item Establishing which variables are important in explaining the values of the response variable.
-\item Predicting values of the response variable.
-\item Describing the strength of the association between the response variable and the explanatory variables.
-\end{itemize}
-\item \textbf{Least squares estimates}: 
-$$\sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
-\item \textbf{RSS for $\hat{e_i}$}: 
-$$RSS = \sum_{i=1}^{n} \hat{e}_i^2$$
-To estimate the error variance $\sigma^2_e$.
-\item \textbf{Usual estimate}: 
-$$s_e^2 = \frac{RSS}{n - k - 1}$$
+  \setlength{\itemsep}{6pt}  % tighten spacing if desired
+
+% ------------------------------------------------------------
+% 0. Overview
+% ------------------------------------------------------------
+  \item \textbf{Main families of regression}
+        \begin{itemize}
+          \item \emph{Linear} – outcome \(Y\) \emph{quantitative}.
+          \item \emph{Logistic} – outcome binary (0 / 1).
+          \item \emph{Cox} – time-to-event in survival analysis (covered later in STAT115).
+        \end{itemize}
+
+  \item \textbf{Terminology}
+        \begin{itemize}
+          \item Explanatory variable \(X\): covariate / predictor / independent var.
+          \item Outcome variable \(Y\): response / dependent var.
+        \end{itemize}
+
+% ------------------------------------------------------------
+% 1. Simple linear regression (SLR)
+% ------------------------------------------------------------
+  \item \textbf{SLR model}\,: \(Y=\beta_{0}+\beta_{1}x+\varepsilon\)
+        \begin{itemize}
+          \item \(\mu_{Y|x}=\beta_{0}+\beta_{1}x\) – mean response at \(x\).
+          \item \(\beta_{0}\): intercept; \(\beta_{1}\): slope; \(\varepsilon\): random error.
+        \end{itemize}
+
+  \item \textbf{Estimated line}\,: \(\hat{y}=\hat{\beta}_{0}+\hat{\beta}_{1}x\),
+        where residuals \(\hat{e}_{i}=y_{i}-\hat{y}_{i}\).
+
+  \item \textbf{Least-squares estimates}
+        \[
+          \hat{\beta}_{1}=\frac{\sum(x_{i}-\bar{x})(y_{i}-\bar{y})}
+                               {\sum(x_{i}-\bar{x})^{2}},
+          \qquad
+          \hat{\beta}_{0}=\bar{y}-\hat{\beta}_{1}\bar{x}.
+        \]
+
+  \item \textbf{Key assumptions (“LINE”)}
+        \begin{itemize}
+          \item \textbf{L}inear relationship between \(\mu_{Y|x}\) and \(x\).
+          \item \textbf{I}ndependent observations.
+          \item \textbf{N}ormal errors \(\varepsilon\).
+          \item \textbf{E}qual error variance (homoscedasticity).
+        \end{itemize}
+
+  \item \textbf{Diagnostics}
+        \begin{itemize}
+          \item Residual plot – check linearity \& equal variance.
+          \item Q-Q plot – check normality of residuals.
+          \item Leverage / Cook’s distance – spot influential points.
+        \end{itemize}
+
+  \item \textbf{Error variance estimate}
+        \[
+          S^{2}_{e}=\frac{\text{RSS}}{n-2},
+          \qquad
+          \text{RSS}=\sum\hat{e}_{i}^{2}.
+        \]
+
+  \item \textbf{Slope inference}
+        \[
+          t=\frac{\hat{\beta}_{1}}{\text{SE}(\hat{\beta}_{1})},
+          \qquad
+          \text{df}=n-2,
+          \qquad
+          \text{SE}(\hat{\beta}_{1})=
+          \frac{S_{e}}{\sqrt{\sum(x_{i}-\bar{x})^{2}}}.
+        \]
+
+  \item \textbf{Prediction at \(x_{0}\)}
+        \[
+          \hat{y}_{0}\pm
+          t_{1-\alpha/2,\;n-2}\;
+          S_{e}\sqrt{1+\frac{1}{n}+
+            \frac{(x_{0}-\bar{x})^{2}}{\sum(x_{i}-\bar{x})^{2}}}.
+        \]
+
+% ------------------------------------------------------------
+% 2. Correlation summary (optional shortcut)
+% ------------------------------------------------------------
+  \item \textbf{Correlation coefficient}
+        \[
+          r=\frac{\sum(x_{i}-\bar{x})(y_{i}-\bar{y})}{
+                \sqrt{\sum(x_{i}-\bar{x})^{2}\;
+                      \sum(y_{i}-\bar{y})^{2}}}, 
+          \qquad -1\le r\le 1.
+        \]
+
+  \item \textbf{Coefficient of determination}\,: \(R^{2}=1-\text{RSS}/\text{TSS}\)
+        – fraction of variance in \(Y\) explained by the model.
+
+% ------------------------------------------------------------
+% 3. Logistic regression (binary outcome) – STAT115 focus
+% ------------------------------------------------------------
+  \item \textbf{Logistic model}
+        \[
+          \log\!\bigl(\tfrac{p}{1-p}\bigr)
+          =\beta_{0}+\beta_{1}x,
+          \qquad
+          p=P(Y=1).
+        \]
+
+  \item \textbf{Interpretation}\,: one-unit increase in \(x\)
+        multiplies the \emph{odds} by \(\exp(\beta_{1})\).
+
+  \item \textbf{Inference on \(\beta_{1}\)}
+        \[
+          z=\frac{\hat{\beta}_{1}}{\text{SE}(\hat{\beta}_{1})},
+          \qquad
+          p\text{-value from }N(0,1).
+        \]
+
+% ------------------------------------------------------------
+% 4. Multiple linear regression (brief)
+% ------------------------------------------------------------
+  \item \textbf{Multiple regression model}
+        \[
+          Y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{k}x_{k}+\varepsilon.
+        \]
+        Uses least squares; df for error \(=n-k-1\).
+
+  \item Typical goals: adjust for confounders, prediction, rank important predictors.
+
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%HYPOTHESIS TESTING%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% ANOVA %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
-
-\pagestyle{fancy}
-\lhead{STAT110/115 Tutoring Materials }
-\rhead{Hypothesis Testing}
-%\maketitle
-
-\begin{itemize}
-\item \textbf{$H_0$}: Null hypothesis. The hypothesis is that there is no association, no effect or no difference.
-\item \textbf{$H_A$}: Alternative hypothesis. The hypothesis is that there is an association, effect or difference.
-\item \textbf{P-value}: We measure the "consistency" of the observed data with the claim using a p-value. The p-value is the probability of observing the value of the test statistic, or a value more extreme, calculated under the assumption that $H_0$ is true. A small p-value indicates we would be unlikely to see the data we did if the null hypothesis were true. i.e., the smaller the p-value is, the easier to reject $H_0$. If the p-value is less than $\alpha$ we reject $H_0$. If the p-value is greater than or equal to $\alpha$ we do not reject $H_0$.
-\item \textbf{Test statistic (t - statistic)}: A test statistic is the standardised value of the sample value. 
-$$T = \frac{observed \ sample \ value - null \ value}{estimated \ standard \ error}$$
-When studying hypothesis testing, we usually use $\pi$ to denote the value of the overall parameter, instead of using p.
-\item \textbf{Z Statistic vs t-statistic}:
-\begin{itemize}
-\item Z-statistic: When to use: Large samples (n $>$ 30) or known population standard deviation ($\sigma$). Basis: Uses population standard deviation ($\sigma$).
-\item t-statistic: When to use: Small samples (n $<$ 30) or unknown population standard deviation ($\sigma$). Basis: Uses sample standard deviation (s).
-\end{itemize}
-\item \textbf{How to conduct a hypothesis test}:
-\begin{enumerate}
-\item Set $H_0$ and $H_A$.
-\item Calculate t-statistic(if it is sample) or Z-statistic(if it is population).
-\item Calculate p-value.
-\item Calculate 95\% CI with (3).
-\item Draw a conclusion based on the p-value (reject $H_0$ or not).
-\end{enumerate}
-\item \textbf{The difference between p and p*}:
-\begin{itemize}
-\item p (Sample Proportion): Frequency or proportion of events in a sample. Example: If 50\% support a policy in a sample, ( p = 0.5 ).
-\item p* (Estimate of Overall Proportion): Estimate of the overall proportion based on sample data. Example: If 50\% support a policy in a sample, ( p* = 0.5 ).
-\end{itemize}
-\item \textbf{When to use chi square}: When trying to control groups in experiments - looking for differences between men and women in each group, etc. Looking for differences between categorical variables - maybe you want to know if there is a difference between men and women for their favourite type of ice cream.
-\item \textbf{How to conduct chi-square test}:
-\begin{enumerate}
-\item Define the Null-Hypothesis and Alternative Hypothesis. $H_0$ : The treatment and response are independent (i.e. no association). $H_A$ : The treatment and response are dependent in some way (i.e. there is some association).
-\item Calculating expected cell counts.
-\item Calculating the $\chi^2$ test statistic.
-\item Get the degree of freedom.
-\item Calculate the p-value with R.
-\item Reject / not reject $H_0$.
-\item Draw conclusion.
-\end{enumerate}
-\item \textbf{Expected cell counts}: 
-$$E_{(row \ i, col \ j)} = \frac{r_i \times c_j}{n}$$
-\begin{itemize}
-\item $r_i$ is the row total, for row i
-\item $c_j$ is the column total, for column j 
-\item n is the total number (of trials, patients, etc.)
-\end{itemize}
-We worked out what we would have expected to see under the null hypothesis in each cell given the observed row and column totals.
-\item \textbf{Formula for chi-square:}
-$$\chi^2=\sum_{ij}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}$$
-\item \textbf{Degree of freedom for chi square}: $\nu = (number of rows - 1) * (number of columns - 1)$
-\item \textbf{Range for p-value}: (0, 1)
-\item \textbf{Belief (interpretation/decision):}
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|c|c|}
-\hline
-& Fail to reject $H_0$ & Reject $H_0$ \\ \hline
-Null is true & Correct interpretation (No error) & Error (Type I) \\ \hline
-Null is false & Error (Type II) & Correct interpretation (No error) \\
-\hline
-\end{tabular}
-\end{table}
-\item \textbf{Type I error (a false positive result)}: Concluding that there is an association between exposure and outcome, where there is not. Type I error is controlled when we set the significance level (usually 0.05).
-\item \textbf{Type II error (a false negative result)}: Concluding that there is not an association between exposure and outcome, where there is. Type II error is primarily controlled through the sample size. Ideally, power should be between 80 and 90\%.
-\end{itemize}
-
-\graphicspath{{./}}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%ANOVA%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-
 \pagestyle{fancy}
 \lhead{STAT110/115 Tutoring Materials}
 \rhead{ANOVA}
 
 \begin{itemize}
-\item \textbf{ANOVA}: Abbreviation of \textbf{Analysis of Variance}.
-\item \textbf{Methods for comparing means} of continuous responses between multiple groups.
-\item \textbf{F-ratio}: Signal/noise
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{anova.jpg}
-\end{figure}
-\item \textbf{Reasons why using "2+2+2=3" is undesirable}:
-    \begin{itemize}
-    \item It's more work than we need to do. Three tests may not seem too bad, but to compare 10 groups we would have to do 45 different pairwise t-tests.
-    \item It can lead to lots of false positive results. Every test has the potential to incorrectly reject H0; i.e. falsely identify a difference between a pair of groups. If we do lots of tests then we risk generating lots of false positives.
-    \end{itemize}
-\item \textbf{ANOVA model}: 
-$$Y_{ij}=\mu_i+e_{ij}$$
-$\mu_i$ is the true mean response for the ith group at the population level. $e_{ij}$ is the error term for the jth response in the ith group. The error terms are assumed to be independent and to follow a N(0, $\sigma^2$) with constant variance. The number of different groups is denoted K, and the number of responses in the ith group is denoted $n_i$.
-\item \textbf{Est. mean for ANOVA}: The "." = est. Value.
-$$\hat{\mu}_i = \bar{y}_i.$$
-\item \textbf{Sample mean for the ith group:}
-$$\bar{y}_i.=\frac{1}{n_i}\sum_{j=1}^{n}y_{ij}$$
-\item \textbf{Formula for residual sum of squares in ANOVA} (no need to memorise):
-$$RSS=\sum_{i=1}^{K}\sum_{j=1}^{n_i}(y_{ij}-\hat{\mu}_i)^2=\sum_{i=1}^{K}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_i.)^2$$
-\item \textbf{Total sum of squares in ANOVA} (no need to memorise):
-$$TSS=\sum_{i=1}^{K}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}..)^2$$
-\item \textbf{$y..$} is the sample mean overall the data.
-\item \textbf{Formula for GSS in ANOVA} (no need to memorise): 
-$$GSS = TSS - RSS$$ 
-$$GSS = \sum_{i=1}^{k}n_i(\bar{y}_i.-\bar{y}..)^2$$
-GSS can be interpreted as a measure of the variation that is explained by differences between groups.
-\item \textbf{Setting up the hypotheses to test ANOVA:}
+  \setlength{\itemsep}{6pt}  % tighten if desired
 
-As usual, the null hypothesis will be the 'no difference' hypothesis:
-$$H_0: \mu_1=\mu_2=...=\mu_K$$
-The alternative is simply an expression that the null is incorrect:
+% ------------------------------------------------------------
+% 0. Why ANOVA?
+% ------------------------------------------------------------
+  \item \textbf{A Nalysis O f VA riance} (ANOVA) compares \emph{means} of a
+        quantitative response across \(\,K\ge 3\) groups with \emph{one} global test
+        instead of many pairwise \(t\)-tests.
 
-\centerline {$H_A:\mu_1, \mu_2, ..., \mu_K$ not all equal.}
+% ------------------------------------------------------------
+% 1. One–way ANOVA model
+% ------------------------------------------------------------
+  \item Model: \(Y_{ij}=\mu_{i}+\varepsilon_{ij}\),\;
+        \(\varepsilon_{ij}\stackrel{\text{i.i.d.}}{\sim}N(0,\sigma^{2})\)
+        (same variance in every group).
 
-\item \textbf{Equation for F statistic:}
-$$F = \frac{GSS/(K-1)}{RSS/(n-K)}$$
-\item \textbf{GMS}: GSS/(K - 1) is the group mean square.
-\item \textbf{RMS}: RSS/(n - K) is the residual mean square.
-\item \textbf{What situations would let $H_0$ fail}: Large differences between group means. Relatively large value of GSS. A large value of F.
-\item \textbf{ANOVA table:}
-\begin{table}[h]
-\centering
+  \item Sample means: \(\bar{y}_{i\cdot}=\dfrac{1}{n_{i}}\sum_{j=1}^{n_{i}}y_{ij}\),
+        \quad overall mean: \(\bar{y}_{\cdot\!\cdot}\).
+
+% ------------------------------------------------------------
+% 2. Sums of squares decomposition
+% ------------------------------------------------------------
+  \[
+    \underbrace{\text{TSS}}_{\text{total}}
+    =\underbrace{\text{GSS}}_{\text{between}}
+    +\underbrace{\text{RSS}}_{\text{within}}
+  \]
+  \[
+    \text{GSS}=\sum_{i=1}^{K} n_{i}(\bar{y}_{i\cdot}-\bar{y}_{\cdot\!\cdot})^{2},
+    \qquad
+    \text{RSS}=\sum_{i=1}^{K}\sum_{j=1}^{n_{i}}(y_{ij}-\bar{y}_{i\cdot})^{2}.
+  \]
+
+% ------------------------------------------------------------
+% 3. Test statistic
+% ------------------------------------------------------------
+  \[
+    F=\frac{\text{GSS}/(K-1)}{\text{RSS}/(n-K)}
+    \quad\sim\;F_{\,K-1,\;n-K}\;\text{ under }H_{0}.
+  \]
+  Reject \(H_{0}:\mu_{1}=\cdots=\mu_{K}\) when \(F\) is large
+  \(\Rightarrow\) right–tail \(p\)-value from \(F\)-distribution.
+
+% ------------------------------------------------------------
+% 4. ANOVA table (to help read R output)
+% ------------------------------------------------------------
+\begin{center}
 \begin{tabular}{lccc}
 \hline
-Source & SS & DF & MS \\ \hline
-Groups & GSS & $K - 1$ & $\frac{GSS}{K - 1}$ \\
-Residuals & RSS & $n - K$ & $\frac{RSS}{n - K}$ \\ \hline
-Total & TSS & $n - 1$ \\ \hline
+Source       & SS  & df          & MS = SS/df \\ \hline
+Groups       & GSS & \(K-1\)     & \(\text{GSS}/(K-1)\) \\
+Residuals    & RSS & \(n-K\)     & \(\text{RSS}/(n-K)\) \\ \hline
+Total        & TSS & \(n-1\)     &                \\ \hline
 \end{tabular}
-\end{table}
-\item \textbf{P-value is right censored}.
-\item \textbf{Blocking variable}: A second treatment variable that when included in ANOVA analysis will have the effect of reducing the SSE term (noise).
+\end{center}
+
+% ------------------------------------------------------------
+% 5. Assumptions & quick checks
+% ------------------------------------------------------------
+  \item Normality of residuals (Q–Q plot) and equal variance (residuals vs.\ fitted).
+        Mild departures are OK if \(n_{i}\) are similar and \(n\) is moderate.
+
+% ------------------------------------------------------------
+% 6. What next if \(H_{0}\) is rejected?
+% ------------------------------------------------------------
+  \item \textbf{Multiple comparisons}: identify which groups differ.  
+        Classic choice – Tukey’s HSD controls family–wise error rate.
+
+% ------------------------------------------------------------
+% 7. R workflow snapshot
+% ------------------------------------------------------------
+  \begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item \verb|a1 <- aov(y ~ group, data = df)| \hfill\(\rightarrow\) global \(F\)-test.
+    \item \verb|summary(a1)| \hfill\(\rightarrow\) ANOVA table + \(p\)-value.
+    \item \verb|TukeyHSD(a1)| \hfill\(\rightarrow\) pairwise CIs and adjusted \(p\)-values.
+  \end{itemize}
+
+% ------------------------------------------------------------
+% 8. Why avoid many \(t\)-tests?
+% ------------------------------------------------------------
+  \item Repeating \(m\) independent tests inflates Type I error:
+        \(\text{FWER}=1-(1-\alpha)^{m}\).  
+        ANOVA keeps the overall \(\alpha\) at the planned level.
+
+% ------------------------------------------------------------
+% 9. Bonus – blocking (two–way) ANOVA idea
+% ------------------------------------------------------------
+  \item Adding a \emph{blocking variable} (e.g.\ batch, sex) can remove
+        extraneous variation and reduce RSS, increasing power.
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% STUDY DESIGN %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials}
+\rhead{Study Design}
+
+\begin{itemize}
+  \setlength{\itemsep}{6pt}
+
+% ------------------------------------------------------------
+% 0. Why study design matters
+% ------------------------------------------------------------
+  \item \textbf{Analytic studies} – test hypotheses such as  
+        “Does a Mediterranean diet increase life-expectancy?”  
+        Key principles: \emph{replication} (separate real effect from chance) and
+        \emph{control} (context for the effect of interest).
+
+  \item \textbf{Descriptive studies} – simply characterise \emph{person–place–time}
+        (e.g.\ lifestyle patterns in NZ).
+
+% ------------------------------------------------------------
+% 1. Populations, frames & sampling
+% ------------------------------------------------------------
+  \item A \textbf{well-defined population} is precise in space \emph{and} time  
+        (e.g.\ “all colorectal-cancer cases in NZ, 2015”).
+  \item \textbf{Sampling frame}: list of all eligible units.  
+        If incomplete, bias may arise.
+
+  \item \textbf{Probability sampling} – selection chances are
+        \emph{known}.  
+        \smallskip
+        Types:
+        \begin{itemize}
+          \item Simple random sample (SRS).
+          \item Stratified sample – improves precision; allows dis-proportionate
+                strata sizes.
+          \item Cluster / multi-stage – cheaper but less precise.
+        \end{itemize}
+
+  \item \textbf{Error in a sample estimate}
+        \[
+          \text{Sample mean}
+          = \underbrace{\text{True mean}}_{\text{target}}
+          + \underbrace{\text{Systematic error}}_{\text{bias}}
+          + \underbrace{\text{Random error}}_{\text{chance}}.
+        \]
+        \begin{itemize}
+          \item Random error ↓ when \(n\) ↑.
+          \item Systematic error (bias) \emph{cannot} be cured by larger \(n\).
+        \end{itemize}
+
+% ------------------------------------------------------------
+% 2. Experimental vs. observational
+% ------------------------------------------------------------
+  \item \textbf{Experimental study} – investigator intervenes  
+        (e.g.\ randomised controlled trial, RCT).  
+        \emph{Randomisation} balances unmeasured factors.
+  \item \textbf{Observational study} – investigator only observes
+        (cohort, case-control).  Cannot fully rule out confounding.
+
+% ------------------------------------------------------------
+% 3. Classic analytic designs
+% ------------------------------------------------------------
+  \begin{itemize}
+    \item \textbf{RCT} (gold standard): analytic, experimental, prospective.  
+          Pros – best for causality; Cons – feasibility/ethics.
+    \item \textbf{Cohort}: analytic, observational, usually prospective.  
+          Pros – clear time order; Cons – long \& costly.
+    \item \textbf{Case-control}: analytic, observational, retrospective.  
+          Pros – efficient for rare disease; Cons – higher bias potential.
+  \end{itemize}
+
+% ------------------------------------------------------------
+% 4. Confounding & bias
+% ------------------------------------------------------------
+  \item \textbf{Confounder} – variable associated with \emph{both}
+        exposure and outcome, distorting the association.
+
+  \item \textbf{Two main bias classes}
+        \begin{itemize}
+          \item Selection bias – non-comparable groups.
+          \item Information bias – systematic measurement error.
+        \end{itemize}
+
+% ------------------------------------------------------------
+% 5. Data-type recap (quick reference)
+% ------------------------------------------------------------
+  \item \textbf{Qualitative (categorical)}  
+        \begin{itemize}
+          \item Nominal – no order (eye colour).  
+          \item Ordinal – natural order (Likert scale).
+        \end{itemize}
+  \item \textbf{Quantitative}  
+        \begin{itemize}
+          \item Discrete – counts (children in family).  
+          \item Continuous – any real value in range (height).
+        \end{itemize}
+
+% ------------------------------------------------------------
+% 6. Flowchart cheat-sheet (text version)
+% ------------------------------------------------------------
+  \item \textbf{Classifying a study}  
+        \[\text{Aim?}\;\Rightarrow
+          \begin{cases}
+            \text{Describe} &\to\ \text{Descriptive (survey)}\\
+            \text{Test} &\to\ 
+              \begin{cases}
+                \text{Intervene? yes} &\to\ \text{Experimental (RCT)}\\
+                \text{Intervene? no} &
+                  \begin{cases}
+                    \text{Forward follow-up} &\to\ \text{Cohort}\\
+                    \text{Backward look} &\to\ \text{Case-control}
+                  \end{cases}
+              \end{cases}
+          \end{cases}
+        \]
+
+\end{itemize}
+
 
 \newpage
 \thispagestyle{empty}
