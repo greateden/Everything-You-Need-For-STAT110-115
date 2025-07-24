@@ -116,7 +116,362 @@
         \end{itemize}
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% R (quick-reference) %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials}
+\rhead{R Functions}
+
+\begin{itemize}
+
+% ============================================================
+% 0. Getting started & help
+% ============================================================
+\item \textbf{Getting help \& packages}
+  \begin{itemize}
+    \item Install once: \texttt{install.packages("tidyverse")}  \hfill\emph{(data wrangling / plots)}
+    \item Load every session: \texttt{library(tidyverse)}
+    \item Function help: \texttt{?lm}, worked example: \texttt{example(t.test)}
+  \end{itemize}
+
+% ============================================================
+% 1. Data import & quick exploration
+% ============================================================
+\item \textbf{Data import \& quick checks}
+  \begin{itemize}
+    \item CSV: \texttt{df <- read.csv("myfile.csv", stringsAsFactors = FALSE)}
+    \item Peek: \texttt{head(df)}, \texttt{str(df)}, \texttt{summary(df)}
+    \item Subset rows: \texttt{dplyr::filter(df, Group == "A")}
+  \end{itemize}
+
+% ============================================================
+% 2. Descriptive statistics
+% ============================================================
+\item \textbf{Descriptive statistics}
+  \begin{itemize}
+    \item Centre: \texttt{mean(x)}, \texttt{median(x)}
+    \item Spread: \texttt{sd(x)}, \texttt{IQR(x)}, \texttt{var(x)}
+    \item Always add \texttt{na.rm = TRUE} if missing values exist
+    \item Correlation: \texttt{cor(x, y)} (number) \; | \;
+          \texttt{cor.test(x, y)} (CI + $p$)
+  \end{itemize}
+
+% ============================================================
+% 3. Graphics (base R)
+% ============================================================
+\item \textbf{Base R graphics}
+  \begin{itemize}
+    \item Histogram: \texttt{hist(x, breaks = 20, main = "Histogram")}
+    \item Scatterplot: \texttt{plot(df$X, df$Y, main = "Scatterplot")}
+  \end{itemize}
+
+% ============================================================
+% 4. Probability distributions
+% ============================================================
+\item \textbf{Key distribution helpers}
+
+  \textbf{Normal} $Z\sim N(0,1)$
+  \begin{itemize}
+    \item Density: \texttt{dnorm(z)}
+    \item Tail area: \texttt{pnorm(q)} ($=P(Z\le q)$)
+    \item Quantile: \texttt{qnorm(p)}
+    \item Random draw: \texttt{rnorm(n)}
+  \end{itemize}
+
+  \textbf{$t$-dist} $T_\nu$
+  \begin{itemize}
+    \item \texttt{dt(x, df)}, \texttt{pt(t, df)}, \texttt{qt(p, df)}, \texttt{rt(n, df)}
+  \end{itemize}
+
+  \textbf{Binomial} $X\sim\mathrm{Bin}(n,\pi)$
+  \begin{itemize}
+    \item Point prob: \texttt{dbinom(x, n, pi)}
+    \item Cumulative: \texttt{pbinom(q, n, pi)}
+    \item Quantile: \texttt{qbinom(p, n, pi)}
+    \item Random draw: \texttt{rbinom(N, n, pi)}
+  \end{itemize}
+
+  \textbf{$\chi^2$ \& F}
+  \begin{itemize}
+    \item $\chi^2$ tail: \texttt{pchisq(q, df, lower.tail = FALSE)}
+    \item Critical $\chi^2$: \texttt{qchisq(0.95, df)}
+    \item F tail: \texttt{pf(F, df1, df2, lower.tail = FALSE)}
+    \item Critical F: \texttt{qf(0.95, df1, df2)}
+  \end{itemize}
+
+% ============================================================
+% 5. Confidence intervals & t-tests
+% ============================================================
+\item \textbf{Confidence intervals \& $t$-tests}
+  \begin{itemize}
+    \item One-sample mean: \texttt{t.test(x, mu = mu0)}
+    \item Two independent groups: \texttt{t.test(y ~ g, data = df)}  
+          (\texttt{var.equal = TRUE} for pooled)
+    \item Paired: \texttt{t.test(before, after, paired = TRUE)}
+    \item Exact one-prop CI / test: \texttt{binom.test(x, n)}
+  \end{itemize}
+
+% ============================================================
+% 6. Tables & tests for proportions
+% ============================================================
+\item \textbf{Two-way tables \& $\chi^2$ / Fisher}
+  \begin{itemize}
+    \item Build: \texttt{tab <- table(df$A, df$B)}; totals: \texttt{addmargins(tab)}
+    \item $\chi^2$ test: \texttt{chisq.test(tab)}
+    \item Small expected counts? use \texttt{fisher.test(tab)}
+  \end{itemize}
+\item \textbf{Proportion tests}
+  \begin{itemize}
+    \item One / two props (large $n$): \texttt{prop.test(x = c(18,12), n = c(30,30))}
+  \end{itemize}
+
+% ============================================================
+% 7. Linear models & ANOVA
+% ============================================================
+\item \textbf{Simple \& multiple linear regression}
+  \begin{itemize}
+    \item Fit: \texttt{fit <- lm(Y ~ X1 + X2, data = df)}
+    \item Inspect: \texttt{summary(fit)}; 95\% CI: \texttt{confint(fit)}
+    \item Predict: \texttt{predict(fit, newdata = data.frame(X1 = 10, X2 = 5),
+          interval = "confidence")}
+  \end{itemize}
+
+\item \textbf{Logistic regression (STAT115 Weeks 10-11)}
+  \begin{itemize}
+    \item Binary outcome: \texttt{logit <- glm(case ~ age + sex,\; family = binomial,\; data = df)}
+    \item Odds ratios: \texttt{exp(coef(logit))}; CI: \texttt{exp(confint(logit))}
+  \end{itemize}
+
+\item \textbf{One-way ANOVA \& multiple comparisons}
+  \begin{itemize}
+    \item Overall model: \texttt{a1 <- aov(y ~ group, data = df)}
+    \item Summary table: \texttt{summary(a1)}
+    \item Pairwise Tukey: \texttt{TukeyHSD(a1)}  \hfill\emph{(controls family-wise error)}
+  \end{itemize}
+
+% ============================================================
+% 8. Simulation helpers
+% ============================================================
+\item \textbf{Simulation snippets}
+  \begin{itemize}
+    \item Reproducibility: \texttt{set.seed(123)}
+    \item 1\,000 $N(0,1)$ draws: \texttt{x <- rnorm(1000)}
+    \item Central-limit-theorem demo:  
+          \texttt{ybar <- replicate(1e4, mean(rnorm(50)))} \hfill\emph{(hist to visualise)}
+  \end{itemize}
+
+% ============================================================
+% 9. House-keeping
+% ============================================================
+\item \textbf{Workspace utilities}
+  \begin{itemize}
+    \item Clear memory: \texttt{rm(list = ls())}
+    \item Save history: \texttt{savehistory("my\_hist.Rhistory")}
+  \end{itemize}
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% PROBABILITY (Week 2) %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials}
+\rhead{Probability}
+
+\begin{itemize}
+
+% -----------------------------------------------------------
+% 0. What do we mean by “probability”?
+% -----------------------------------------------------------
+\item \textbf{Subjective probability} – a personal degree of belief  
+      (e.g.\ “I’m 80 \% sure it will rain tomorrow”).
+\item \textbf{Objective / long–run probability} – the proportion of times an event occurs
+      in a very large number of identical trials (e.g.\ coin toss heads $\approx 0.5$).
+
+% -----------------------------------------------------------
+% 1. Sample space \& events
+% -----------------------------------------------------------
+\item \textbf{Sample space} $S$ – all possible outcomes of an experiment  
+      (fair die: $S=\{1,2,3,4,5,6\}$).
+\item \textbf{Event} $A$ – a subset of $S$ (e.g.\ “even number” = $\{2,4,6\}$).
+
+% -----------------------------------------------------------
+% 2. Basic rules
+% -----------------------------------------------------------
+\item \textbf{Complement}:\quad $P(A)+P(\overline{A}) = 1$.
+\item \textbf{Addition rule} (two events):\quad
+      $P(A\cup B)=P(A)+P(B)-P(A\cap B)$.
+\item \textbf{Multiplication rule / conditional prob.}:\quad
+      $P(A\cap B)=P(A)\,P(B\,|\,A)$.
+
+% -----------------------------------------------------------
+% 3. Independence
+% -----------------------------------------------------------
+\item \textbf{Independent events} – knowing one tells us nothing about the other.
+      Equivalent checks:  
+      \[
+        P(A\cap B)=P(A)\,P(B)\quad\Longleftrightarrow\quad
+        P(B)=P(B\,|\,A)\quad\Longleftrightarrow\quad
+        P(A)=P(A\,|\,B).
+      \]
+
+% -----------------------------------------------------------
+% 4. Diagnostic-test notation (STAT115 focus)
+% -----------------------------------------------------------
+\begin{itemize}
+  \item $A$ = person \emph{has} the disease, $\overline{A}$ = person \emph{does not}.
+  \item $B$ = test is \emph{positive}, $\overline{B}$ = test is \emph{negative}.
+\end{itemize}
+
+\begin{tabular}{@{}ll@{}}
+\textbf{Sensitivity} & $P(B\,|\,A)$          – probability the test detects the disease.\\
+\textbf{Specificity} & $P(\overline{B}\,|\,\overline{A})$ – probability a healthy person tests negative.\\
+\textbf{False-positive rate} & $1-\text{specificity}=P(B\,|\,\overline{A})$.\\
+\textbf{Positive Predictive Value (PPV)} & $P(A\,|\,B)$ – “If the test is positive, how likely is disease?”\\
+\textbf{Negative Predictive Value (NPV)} & $P(\overline{A}\,|\,\overline{B})$.\\
+\end{tabular}
+
+% -----------------------------------------------------------
+% 5. Bayes’ theorem (links PPV/NPV to prevalence)
+% -----------------------------------------------------------
+\[
+  P(A\,|\,B)=\frac{P(B\,|\,A)\,P(A)}{P(B\,|\,A)P(A)+P(B\,|\,\overline{A})P(\overline{A})}.
+\]
+\emph{Tip:} Low disease prevalence ($\downarrow$) $\Rightarrow$ PPV tends to be low even when sensitivity and specificity are high.
+
+% -----------------------------------------------------------
+% 6. Two-by-two table quick check
+% -----------------------------------------------------------
+\[
+\begin{array}{c|cc|c}
+           & \text{Disease }A & \text{No disease }\overline{A} & \text{Total} \\ \hline
+\text{Test + }B     & a & b & a+b \\
+\text{Test – }\overline{B} & c & d & c+d \\ \hline
+\text{Total} & a+c & b+d & n
+\end{array}
+\]
+\begin{itemize}
+  \item Sensitivity $=a/(a+c)$,\; Specificity $=d/(b+d)$.
+  \item PPV $=a/(a+b)$,\; NPV $=d/(c+d)$.
+\end{itemize}
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%CONTINGENCY TABLE%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials}
+\rhead{Contingency Table}
+
+\begin{itemize}
+\item \textbf{Relative Risk (RR)}: Ratio of two probabilities. RR gives the risk of an outcome relative to "exposure". It is calculated as the ratio of the risk of an outcome for an exposed and an unexposed group. $$RR = \frac{a/(a+b)}{c/(c+d)}$$
+Meaning of the RR value: RR = 1 there is no association between outcome and exposure (e.g. rugby position and injury). RR < 1 first row happens less likely than the second row. RR > 1 first row happens more likely than the second row.
+\item \textbf{Risk Difference (RD)}: Difference between two probabilities. The RD is given by the difference in the risk for the two groups. $$RD = \frac{a}{a + b} - \frac{c}{c + d}$$
+\item \textbf{Odds Ratio (OR)}: Ratio of two odds. The OR compares the odds of an outcome for two groups. Ratio of the odds of the outcome for the exposed group to that for the unexposed group. $$OR = \frac{a/b}{c/d} = \frac{ad}{bc}$$. There is no mathematical distinction between exposure and outcome variables -> makes it particularly useful for quantifying associations between binary variables where there is no "direction" e.g. alcohol consumption (Yes/No) and smoking (Yes/No).
+\item \textbf{Confidence Interval for Difference Between Two Proportions}: $$p1 = \frac{a}{r1}$$, $$p2 = \frac{c}{r2}$$, $$(p_1 - p_2) \pm Z_{(1 - \frac{\alpha}{2})} \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}$$
+
+\item \textbf{Steps to Calculate the Confidence Interval for Relative Risk}:
+    \begin{itemize}
+    \item Get the RR value.
+    \item Get the ln(RR).
+    \item Calculate the SE of ln(RR) (with formula).
+    \item Calculate the CI for ln(RR) (with formula).
+    \item Calculate the CI for RR (exp() function).
+    \end{itemize}
+\item \textbf{Standard error for Confidence interval for relative risk:}$$S_{ln}(RR) = \sqrt{\frac{1}{a} - \frac{1}{r_1} + \frac{1}{c} - \frac{1}{r_2}}$$
+\item \textbf{Key formula for Confidence interval for relative risk:}$$\ln(RR) \pm Z_{(1-\frac{\alpha}{2})} \cdot S_{\ln(RR)}$$
+\item \textbf{Steps to Calculate the Confidence Interval for Odds Ratio}:
+    \begin{itemize}
+    \item Get the OR value.
+    \item Get the ln(OR).
+    \item Calculate the SE of ln(OR) (with formula).
+    \item Calculate the CI for ln(OR) (with formula).
+    \item Calculate the CI for OR (exp() function).
+    \end{itemize}
+\item \textbf{Standard error for Confidence interval for Odds Ratio:} $$S_{\ln(OR)} = \sqrt{\frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d}}$$
+\item \textbf{The meaning for range of CI:}
+\begin{figure} [H]
+\centering
+\begin{tikzpicture}
+% Horizontal lines with error bars
+\draw (0,5) -- (1,5); % Line a
+\draw (0, 4.8) -- (0, 5.2); % Error bar for line a
+\draw (1, 4.8) -- (1, 5.2); % Error bar for line a
+
+\draw (0.5,4) -- (2,4); % Line b
+\draw (0.5, 3.8) -- (0.5, 4.2); % Error bar for line b
+\draw (2, 3.8) -- (2, 4.2); % Error bar for line b
+
+\draw (1.75,3) -- (3,3); % Line c
+\draw (1.75, 2.8) -- (1.75, 3.2); % Error bar for line c
+\draw (3, 2.8) -- (3, 3.2); % Error bar for line c
+
+\draw (1,2) -- (4.5,2); % Line d
+\draw (1, 1.8) -- (1, 2.2); % Error bar for line d
+\draw (4.5, 1.8) -- (4.5, 2.2); % Error bar for line d
+
+\draw (3,1) -- (4.5,1); % Line e
+\draw (3, 0.85) -- (3, 1.15); % Error bar for line e
+\draw (4.5, 0.85) -- (4.5, 1.15); % Error bar for line e
+
+\draw (1.15, 0.85) -- (1.15, 5.2); % first bar
+\draw (3.25, 0.85) -- (3.25, 5.2); % second bar
+
+% Labels for horizontal lines
+\node at (-0.5,5) {(a)};
+\node at (-0.5,4) {(b)};
+\node at (-0.5,3) {(c)};
+\node at (-0.5,2) {(d)};
+\node at (-0.5,1) {(e)};
+
+\node [font=\tiny, align=left] at (6.7, 5) {Has actual meaning};
+\node [font=\tiny, align=left] at (6.7, 4) {Maybe has actual meaning};
+\node [font=\tiny, align=left] at (6.7, 3) {Has no actual meaning};
+\node [font=\tiny, align=left] at (6.7, 2) {Tiny sample size};
+\node [font=\tiny, align=left] at (6.7, 1) {Could accept $H_0$};
+
+% Vertical text on left
+\node[rotate=270, font=\tiny] at (5,4) {Has statistical meaning};
+
+\draw (4.8, 5.2) -- (4.8,2.8);
+\draw (4.7, 2.8) -- (4.8,2.8);
+\draw (4.7, 5.2) -- (4.8,5.2);
+
+\node[rotate=270, font=\tiny, align=center] at (5.1,1.5) {Has no statistical \\ meaning};
+\draw (4.8, 2.2) -- (4.8,0.8);
+\draw (4.7, 0.8) -- (4.8,0.8);
+\draw (4.7, 2.2) -- (4.8,2.2);
+
+
+\draw (5,0) -- (6,0); 
+\draw (5, -0.1) -- (5, 0.1);
+\draw (6, -0.1) -- (6, 0.1); 
+\node [font=\tiny, align=left] at (7.2, 0) {Confidence Interval};
+
+% Text below the diagram
+\node [font=\tiny, align=center] at (1.15, 0.5) {Values with \\ practical significance};
+\node [align=center] at (3.25, 0.5) {$H_0$};
+
+\end{tikzpicture}
+\end{figure}
+\item \textbf{Risk Difference in Terms of the Number of Cases Per x People}: To get the risk difference in terms of the number of cases per x people, we need to multiply this answer by x. For example, express your answer in terms of the extra number of cases of cancer among 1000 people who eat red or processed meat four or more times per week.  $$\frac{2341}{191678}-\frac{277}{68601}=0.008175$$
+To get the risk difference in terms of the number of cases per 1000 people, we need to multiply this answer by 1000. $$RD = \left(\frac{2341}{191678}-\frac{277}{68601}\right)*1000=8.175$$
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -297,382 +652,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% R %%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-
-\pagestyle{fancy}
-\lhead{STAT110/115 Tutoring Materials}
-\rhead{R Functions}
-
-\begin{itemize}
-\item \textbf{Usage of pnorm()}: pnorm(q, mean = 0, sd = 1, lower.tail = TRUE)
-
-\begin{figure} [H]
-\centering
-\begin{tikzpicture}
-
-    \begin{axis}[
-        no markers, 
-        domain=-3:3, 
-        samples=100, 
-        axis lines*=left, 
-        xlabel=$z$, 
-        height=4cm, 
-        width=12cm, 
-        xtick={-3,-2,-1,0,1,2,3}, 
-        ytick=\empty,
-        enlargelimits=false, 
-        clip=false, 
-        axis on top,
-        grid = major
-    ]
-    \addplot [very thick,cyan!50!black] {exp(-x^2/2)/sqrt(2*pi)};
-    \addplot [name path=A,domain=0:1.64,cyan!50!black] {exp(-x^2/2)/sqrt(2*pi)};
-    \path [name path=B] (axis cs:0,0) -- (axis cs:1.64,0);
-    \addplot [red!50,opacity=0.5] fill between[of=A and B];
-    \node[pin=above right:{\scriptsize \textbf{Probability}}] at (axis cs:1,0.15) {};
-    \end{axis}
-\end{tikzpicture}
-
-Find Pr(0 $<$ Z $<$ 1.64)\\
-pnorm(1.64) - pnorm(0)
-\end{figure}
-
-This function is used to find the probability in a specific area under a normal distribution curve. The parameter 'q' is the "value" from which you want the area above/below. \\
-Example question: Find the proportion of students with a height between 180-190cm.
-
-\item \textbf{Usage of qnorm()}: qnorm(p, mean = 0, sd = 1, lower.tail = TRUE) 
-\begin{figure} [H]
-\centering
-\begin{tikzpicture}
-    \begin{axis}[
-        no markers, 
-        domain=-3:3, 
-        samples=100, 
-        axis lines*=left, 
-        xlabel=$x$, 
-        height=4cm, 
-        width=12cm, 
-        xtick={-3,-2,-1,0,1,2,3}, 
-        xticklabels={140, 150, 160, 170, 180, 190, 200},
-        ytick=\empty,
-        enlargelimits=false, 
-        clip=false, 
-        axis on top,
-        grid = major
-    ]
-    \addplot [very thick,cyan!50!black] {exp(-x^2/2)/sqrt(2*pi)};
-    \addplot [name path=A,domain=1.282:3,cyan!50!black] {exp(-x^2/2)/sqrt(2*pi)};
-    \path [name path=B] (axis cs:1.282,0) -- (axis cs:3,0);
-    \addplot [red!50,opacity=0.5] fill between[of=A and B];
-    \node[pin=above right:{\scriptsize \textbf{0.1}}] at (axis cs:2,0.1) {};
-    \end{axis}
-\end{tikzpicture}
-
-Find the height which is exceeded by 10\% of students.\\
-qnorm (0.1, mean = 170, sd=10, lower.tail = FALSE)\\
-or\\
-qnorm (0.9 ,mean = 170, sd = 10)\\
-\end{figure}
-This function is used to find the value "q" in pnorm(). \\
-Example question: Find the height which is exceeded by 10\% of students.
-
-\item \textbf{Usage of dbinom()}: dbinom(x=15, size=20, prob=0.75) \\
-This function will provide the individual binomial probabilities associated with a given outcome, provided the number of trials (size) and the probability of 'success' (prob).
-
-\item \textbf{Usage of pbinom()}: pbinom(q=10,size=20,prob=0.75) \\
-This function will provide the sum of all individual binomial probabilities less than or equal to a given outcome q, provided the number of trials (size) and the probability of 'success' (prob). \\
-Example question: Find the probability that 10 or fewer live with both parents.
-
-\item \textbf{Usage of pt()}: 2*pt(q=2.12, df=17, lower.tail=FALSE)
-
-\begin{figure} [H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    no markers, domain=-4:4, samples=100,
-    axis lines*=left, xlabel=$x$, ylabel={$t$-distribution with $ \nu = 17 $ degrees of freedom},
-    every axis y label/.style={at=(current axis.above origin),anchor=south},
-    every axis x label/.style={at=(current axis.right of origin),anchor=west},
-    height=4cm, width=12cm,
-    xtick={-2.12,0,2.12}, ytick=\empty,
-    enlargelimits=false, clip=false, axis on top,
-    grid = major
-]
-\addplot [fill=cyan!20, draw=none, domain=-4:-2.12] {exp(-x^2/2)/sqrt(2*pi)} \closedcycle;
-\addplot [fill=cyan!20, draw=none, domain=2.12:4] {exp(-x^2/2)/sqrt(2*pi)} \closedcycle;
-\addplot [very thick,cyan!50!black] {exp(-x^2/2)/sqrt(2*pi)};
-
-% Add arrows
-\draw [->, ultra thick] (axis cs: -2.12,0.05) -- (axis cs: -3,0.05);
-\draw [->, ultra thick] (axis cs: 2.12,0.05) -- (axis cs: 3,0.05);
-\end{axis}
-\end{tikzpicture}
-\end{figure}
-
-This function is used to get the p-value. Because there are two tails, so we need to *2.
-
-\item \textbf{Usage of qt()}: qt(p, df) \\
-This function is used to find the multiplier.
-
-\item \textbf{Usage of pchisq()}: 1-pchisq(q = 9.70, df = 1) \\
-This function is used to find the p-value of a chi-square.
-
-\item \textbf{Usage of qchisq()}: qchisq(p = 0.95, df = 1) \\
-This function is used to find the critical value of chi-square.
-
-\item \textbf{Usage of pf()}: pf(1.0242, df1=3, df2=28, lower.tail=F) \\
-This function is used to find the p-value of the F-distribution.
-
-\item \textbf{Usage of qf()}: qf(0.05, 3, 15, lower.tail=FALSE) \\
-This function is used to find the critical value of F statistic.
-
-\item \textbf{Output for regression model fit}:
-
-\begin{mdframed}[backgroundcolor=gray!15, linecolor=black]
-\begin{verbatim}
-Call:
-lm(formula = y ~ x1 + x2, data = mydata)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.1411 -0.3145  0.0187  0.3178  1.1867 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   2.2154     0.1321   16.77   <2e-16 ***
-x1           -0.7307     0.0917   -7.97   <2e-16 ***
-x2            0.3263     0.0862    3.78   <2e-16 ***
-
-Signif. codes:  
-*** p<0.001 ** p<0.01 * p<0.05 ' ' p>0.05
-
-Residual standard error: 0.5209 on 37 degrees of freedom
-Multiple R-squared: 0.7995, Adjusted R-squared: 0.7833 
-F-statistic: 49.79 on 2 and 37 DF, p-value: 5.757e-11
-\end{verbatim}
-\end{mdframed}
-
-\begin{itemize}
-\item The "Residual standard error" represents the standard deviation of the residuals, which is an estimate of the average distance between the observed and predicted values.
-\item The "Multiple R-squared" and "Adjusted R-squared" values indicate the goodness of fit of the model. They represent the proportion of variance in the response variable explained by the predictors. Adjusted R-squared takes into account the number of predictors and the sample size.
-\item The "F-statistic" is a measure of the overall significance of the model. It assesses whether the regression model as a whole is statistically significant. 
-\item The associated p-value indicates the probability of obtaining such an F-statistic by chance.
-\end{itemize}
-
-\item \textbf{Output for a t test}:
-
-\begin{mdframed}[backgroundcolor=gray!15, linecolor=black]
-\begin{verbatim}
-Analysis of Variance Table
-
-Response: y
-             Df  Sum Sq Mean Sq F value Pr(>F)    
-x1            1  1.3456  1.3456  12.463 0.00123 **
-x2            2  0.7621  0.3811   3.527 0.03812 * 
-Residuals    36  3.5584  0.0988                   
-
-Signif. codes: 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-\end{verbatim}
-\end{mdframed}
-
-\begin{itemize}
-\item The "data" line indicates the name of the variable or group being tested.
-\item The "t" value represents the calculated t-statistic for the test. It measures the difference between the sample mean and the hypothesised mean relative to the variability in the data.
-\item The "df" value stands for degrees of freedom, which measures the amount of information available for the test. It represents the sample size minus one.
-\item The "p-value" is the probability of obtaining the observed test statistic (t-value) or a more extreme value under the null hypothesis. It indicates the level of statistical significance.
-\item The "alternative hypothesis" states the alternative to the null hypothesis.
-\item The "95 per cent confidence interval" provides a range of values within which we can be 95\% confident that the true population mean lies. It is calculated based on the sample data and reflects the estimate's precision.
-\item The "sample estimates" section presents the estimated mean of the variable or group being tested.
-\end{itemize}
-
-\item \textbf{Output for an ANOVA table}:
-
-\begin{mdframed}[backgroundcolor=gray!15, linecolor=black]
-\begin{verbatim}
-data: x
-
-t = 3.5897, df = 98, p-value = 0.0005379
-
-alternative hypothesis: true mean is not equal to 0
-
-95 percent confidence interval:
- 0.05743578 0.19679155
-
-sample estimates:
-mean of x
- 0.1271137
-\end{verbatim}
-\end{mdframed}
-
-\begin{itemize}
-\item The "Response" line shows the name of the dependent variable.
-\item The "Df" column represents the degrees of freedom associated with each factor or source of variation.
-\item The "Sum Sq" column shows the sum of squares associated with each factor or source of variation. It represents the total variability explained by each factor.
-\item The "Mean Sq" column represents the mean square, which is calculated by dividing the sum of squares by the degrees of freedom. It represents the average variability explained by each factor.
-\item The "F value" column displays the F-statistic, which is calculated by dividing the mean square of each factor by the mean square of the residuals. It measures the ratio of explained variation to unexplained variation and is used to test the significance of each factor.
-\item The "Pr($>$F)" column shows the p-value associated with each factor. It indicates the probability of obtaining the observed F-statistic or a more extreme value under the null hypothesis.
-\end{itemize}
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%PROBABILITY%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-
-\pagestyle{fancy}
-\lhead{STAT110/115 Tutoring Materials }
-\rhead{Probability}
-%\maketitle
-
-\begin{itemize}
-\item \textbf{Subjective Probability}: The individual's personal estimate of the chance of loss.
-\item \textbf{Probability as the Degree of Belief}: In a statement.
-\item \textbf{Objective Probability}: The long-run relative frequency of an event based on the assumptions of an infinite number of observations and of no change in the underlying conditions.
-\item \textbf{Sample Space Definition}: The sample space is the set of all possible outcomes of an experiment, e.g., in the case of a fair die, \{1, 2, 3, 4, 5, 6\}.
-\item \textbf{Complementary Events}: $$Pr(A) + Pr(\bar{A}) = 1$$
-\item \textbf{Mutually Exclusive Events}: There is no intersection between the two events $$Pr(A \cap B) = 0$$ e.g., Māori and Chinese.
-\item \textbf{Conditional Probability Multiplication Rule}: $$Pr(A \cap B) = Pr(A) Pr(B|A)$$
-\item \textbf{Conditional Probability Addition Rule}: $$Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B)$$
-\item \textbf{Independent Events}: The outcome of one event does not affect the outcome of the second event.
-\item \textbf{Independence Check} (true if): $$Pr(B) \neq Pr(B | A)$$ or $$Pr(A) \neq Pr(A | B)$$
-\item \textbf{Definitions of Diagnostic Tests}: Sensitivity, Specificity, False positive fraction, Positive Predictive Value, Negative Predictive Value
-\item \textbf{Sensitivity (Diagnostic Tests)}: $$Pr(B | A)$$ The probability that a person with the disease has a positive test. Think of this as "the probability of a positive test result, given the person actually has the disease.
-\item \textbf{Specificity (Diagnostic Tests)}: $$Pr(\bar{B} | \bar{A})$$ The probability that a person without the disease has a negative test. Think of this as "the probability of a negative test result, given the person does NOT have the disease.
-\item \textbf{Negative Predictive Value}: $$Pr(\bar{A} | \bar{B})$$ The proportion of patients with negative test results who don't have the disease. The proportion of patients with negative test results who are correctly diagnosed.
-\item \textbf{False positive fraction (Diagnostic Tests)}: $$1 - specificity = Pr(\bar{B} | \bar{A})$$
-\item \textbf{Positive Predictive Value}: $$Pr(A | B)$$ The proportion of patients with positive test results who have the disease. The proportion of patients with positive test results who are correctly diagnosed.
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%CONTINGENCY TABLE%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-
-\pagestyle{fancy}
-\lhead{STAT110/115 Tutoring Materials}
-\rhead{Contingency Table}
-
-\begin{itemize}
-\item \textbf{Relative Risk (RR)}: Ratio of two probabilities. RR gives the risk of an outcome relative to "exposure". It is calculated as the ratio of the risk of an outcome for an exposed and an unexposed group. $$RR = \frac{a/(a+b)}{c/(c+d)}$$
-Meaning of the RR value: RR = 1 there is no association between outcome and exposure (e.g. rugby position and injury). RR < 1 first row happens less likely than the second row. RR > 1 first row happens more likely than the second row.
-\item \textbf{Risk Difference (RD)}: Difference between two probabilities. The RD is given by the difference in the risk for the two groups. $$RD = \frac{a}{a + b} - \frac{c}{c + d}$$
-\item \textbf{Odds Ratio (OR)}: Ratio of two odds. The OR compares the odds of an outcome for two groups. Ratio of the odds of the outcome for the exposed group to that for the unexposed group. $$OR = \frac{a/b}{c/d} = \frac{ad}{bc}$$. There is no mathematical distinction between exposure and outcome variables -> makes it particularly useful for quantifying associations between binary variables where there is no "direction" e.g. alcohol consumption (Yes/No) and smoking (Yes/No).
-\item \textbf{Confidence Interval for Difference Between Two Proportions}: $$p1 = \frac{a}{r1}$$, $$p2 = \frac{c}{r2}$$, $$(p_1 - p_2) \pm Z_{(1 - \frac{\alpha}{2})} \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}$$
-
-\item \textbf{Steps to Calculate the Confidence Interval for Relative Risk}:
-    \begin{itemize}
-    \item Get the RR value.
-    \item Get the ln(RR).
-    \item Calculate the SE of ln(RR) (with formula).
-    \item Calculate the CI for ln(RR) (with formula).
-    \item Calculate the CI for RR (exp() function).
-    \end{itemize}
-\item \textbf{Standard error for Confidence interval for relative risk:}$$S_{ln}(RR) = \sqrt{\frac{1}{a} - \frac{1}{r_1} + \frac{1}{c} - \frac{1}{r_2}}$$
-\item \textbf{Key formula for Confidence interval for relative risk:}$$\ln(RR) \pm Z_{(1-\frac{\alpha}{2})} \cdot S_{\ln(RR)}$$
-\item \textbf{Steps to Calculate the Confidence Interval for Odds Ratio}:
-    \begin{itemize}
-    \item Get the OR value.
-    \item Get the ln(OR).
-    \item Calculate the SE of ln(OR) (with formula).
-    \item Calculate the CI for ln(OR) (with formula).
-    \item Calculate the CI for OR (exp() function).
-    \end{itemize}
-\item \textbf{Standard error for Confidence interval for Odds Ratio:} $$S_{\ln(OR)} = \sqrt{\frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d}}$$
-\item \textbf{The meaning for range of CI:}
-\begin{figure} [H]
-\centering
-\begin{tikzpicture}
-% Horizontal lines with error bars
-\draw (0,5) -- (1,5); % Line a
-\draw (0, 4.8) -- (0, 5.2); % Error bar for line a
-\draw (1, 4.8) -- (1, 5.2); % Error bar for line a
-
-\draw (0.5,4) -- (2,4); % Line b
-\draw (0.5, 3.8) -- (0.5, 4.2); % Error bar for line b
-\draw (2, 3.8) -- (2, 4.2); % Error bar for line b
-
-\draw (1.75,3) -- (3,3); % Line c
-\draw (1.75, 2.8) -- (1.75, 3.2); % Error bar for line c
-\draw (3, 2.8) -- (3, 3.2); % Error bar for line c
-
-\draw (1,2) -- (4.5,2); % Line d
-\draw (1, 1.8) -- (1, 2.2); % Error bar for line d
-\draw (4.5, 1.8) -- (4.5, 2.2); % Error bar for line d
-
-\draw (3,1) -- (4.5,1); % Line e
-\draw (3, 0.85) -- (3, 1.15); % Error bar for line e
-\draw (4.5, 0.85) -- (4.5, 1.15); % Error bar for line e
-
-\draw (1.15, 0.85) -- (1.15, 5.2); % first bar
-\draw (3.25, 0.85) -- (3.25, 5.2); % second bar
-
-% Labels for horizontal lines
-\node at (-0.5,5) {(a)};
-\node at (-0.5,4) {(b)};
-\node at (-0.5,3) {(c)};
-\node at (-0.5,2) {(d)};
-\node at (-0.5,1) {(e)};
-
-\node [font=\tiny, align=left] at (6.7, 5) {Has actual meaning};
-\node [font=\tiny, align=left] at (6.7, 4) {Maybe has actual meaning};
-\node [font=\tiny, align=left] at (6.7, 3) {Has no actual meaning};
-\node [font=\tiny, align=left] at (6.7, 2) {Tiny sample size};
-\node [font=\tiny, align=left] at (6.7, 1) {Could accept $H_0$};
-
-% Vertical text on left
-\node[rotate=270, font=\tiny] at (5,4) {Has statistical meaning};
-
-\draw (4.8, 5.2) -- (4.8,2.8);
-\draw (4.7, 2.8) -- (4.8,2.8);
-\draw (4.7, 5.2) -- (4.8,5.2);
-
-\node[rotate=270, font=\tiny, align=center] at (5.1,1.5) {Has no statistical \\ meaning};
-\draw (4.8, 2.2) -- (4.8,0.8);
-\draw (4.7, 0.8) -- (4.8,0.8);
-\draw (4.7, 2.2) -- (4.8,2.2);
-
-
-\draw (5,0) -- (6,0); 
-\draw (5, -0.1) -- (5, 0.1);
-\draw (6, -0.1) -- (6, 0.1); 
-\node [font=\tiny, align=left] at (7.2, 0) {Confidence Interval};
-
-% Text below the diagram
-\node [font=\tiny, align=center] at (1.15, 0.5) {Values with \\ practical significance};
-\node [align=center] at (3.25, 0.5) {$H_0$};
-
-\end{tikzpicture}
-\end{figure}
-\item \textbf{Risk Difference in Terms of the Number of Cases Per x People}: To get the risk difference in terms of the number of cases per x people, we need to multiply this answer by x. For example, express your answer in terms of the extra number of cases of cancer among 1000 people who eat red or processed meat four or more times per week.  $$\frac{2341}{191678}-\frac{277}{68601}=0.008175$$
-To get the risk difference in terms of the number of cases per 1000 people, we need to multiply this answer by 1000. $$RD = \left(\frac{2341}{191678}-\frac{277}{68601}\right)*1000=8.175$$
-\end{itemize}
-
-\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%CI%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newpage
 \pagestyle{fancy}
 \lhead{STAT110/115 Tutoring Materials }
 \rhead{Confidence Interval}
