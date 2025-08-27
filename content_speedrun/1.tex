@@ -1,0 +1,461 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Preamble: layout & typography ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{tabularx,booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=MidnightBlue,
+  urlcolor=MidnightBlue,
+  citecolor=MidnightBlue
+}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{listings}
+\usepackage{pifont}
+
+% ---------- Colors ----------
+\definecolor{Accent}{HTML}{0F766E}      % teal-ish for headers
+\definecolor{SoftBg}{HTML}{F3F7F7}      % light background for boxes
+\definecolor{RecallBg}{HTML}{FFF6E5}    % soft amber for recall
+\definecolor{PracticeBg}{HTML}{EEF6FF}  % soft blue for practice
+\definecolor{Rbg}{HTML}{F6F6F6}         % code bg
+
+% ---------- Headings ----------
+\titleformat{\section}
+  {\Large\bfseries\color{Accent}}{Lecture \thesection}{0.6em}{—\ }
+\titleformat{\subsection}
+  {\bfseries}{\thesubsection}{0.6em}{}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{STAT115 Content Speed-Run}
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ---------- Lists ----------
+\setlist[itemize]{topsep=4pt,itemsep=2pt,parsep=0pt,leftmargin=1.2em}
+\setlist[enumerate]{topsep=4pt,itemsep=3pt,parsep=0pt,leftmargin=1.4em}
+
+% ---------- Listings (R) ----------
+\lstdefinelanguage{R}{
+  morekeywords={if,else,repeat,while,function,for,in,next,break,TRUE,FALSE,NA,NaN,Inf},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]"
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape\color{gray!70!black},
+  showstringspaces=false,
+  frame=single,
+  framerule=0pt,
+  rulecolor=\color{white},
+  backgroundcolor=\color{Rbg},
+  columns=fullflexible,
+  keepspaces=true,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em
+}
+
+% ---------- Pedagogy-flavoured boxes ----------
+\newtcolorbox{corebox}{
+  breakable, enhanced, colback=SoftBg, colframe=Accent!40!black,
+  title=\textbf{Core Content} \hfill \scriptsize(2--6 min skim),
+  boxrule=0.5pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm
+}
+
+\newtcolorbox{recallbox}{
+  breakable, enhanced, colback=RecallBg, colframe=orange!60!black,
+  title=\textbf{Active Recall} \hfill \scriptsize(cover \emph{Core Content} above; answer from memory),
+  boxrule=0.5pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm
+}
+
+\newtcolorbox{practicebox}{
+  breakable, enhanced, colback=PracticeBg, colframe=blue!60!black,
+  title=\textbf{Micro Practice} \hfill \scriptsize(5--10 min),
+  boxrule=0.5pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm
+}
+
+\newtcolorbox{rbox}{
+  breakable, enhanced, colback=Rbg, colframe=black!15,
+  title=\textbf{R Mini-Kit} \hfill \scriptsize(copy \& run),
+  boxrule=0.5pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm
+}
+
+\newcommand{\reviewticks}{
+  \vspace{0.4em}
+  \noindent\scriptsize\textbf{Spaced Review:}
+  \fbox{\phantom{D0}} Day 0\quad
+  \fbox{\phantom{D2}} Day 2\quad
+  \fbox{\phantom{D7}} Day 7\quad
+  \fbox{\phantom{D14}} Day 14
+}
+
+% ---------- Title ----------
+\title{\vspace{-1.5em}\textbf{STAT115 Content Speed-Run}\\
+\large Self-Study Pack (Active Recall + Micro Practice + R Mini-Kit)}
+\author{Prepared for catch-up after a six-week absence}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{tcolorbox}[colback=SoftBg,colframe=Accent!40!black,breakable,boxrule=0.5pt,arc=2mm,title=\textbf{How to use this pack (learning-science built-in)}]
+\begin{itemize}
+  \item \textbf{Active recall first, reread last:} answer from memory before checking. Speaking your answer out loud improves retention.
+  \item \textbf{Dual coding:} sketch tiny diagrams (axes, curves, residual plots) alongside formulas and code.
+  \item \textbf{Spacing \& interleaving:} tick the review boxes (Day 0/2/7/14) and mix topics during review.
+  \item \textbf{Error log:} when you miss a recall item, write why and how you will avoid it next time.
+\end{itemize}
+\end{tcolorbox}
+
+\tableofcontents
+\newpage
+
+% =========================================================
+\section{Orientation \& What Statistics Is}
+
+\begin{corebox}
+\begin{itemize}
+  \item Statistics is \textbf{learning from data} and about \textbf{describing and quantifying variability}.
+  \item Tutorials are highly recommended; R is available on lab machines.
+  \item Final exam: \textbf{3 hours}, about \textbf{90 multiple-choice} questions. Final grade: \(F = 0.7\times Exam + 0.3\times Assignments\).
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Complete: ``Statistics is \underline{\hspace{4cm}}.''
+  \item Besides learning from data, what two words describe the focus of statistics?
+  \item What is the final-exam format and duration?
+  \item How is the final mark calculated?
+  \item One reason tutorials add value?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Find two tutorial slots you can attend and write them here. Commit on paper as well.
+\end{practicebox}
+
+\begin{rbox}
+No code yet—just ensure you can open RStudio and run: \texttt{1 + 1}.
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Statistical Software (R focus)}
+
+\begin{corebox}
+\begin{itemize}
+  \item We will use \textbf{R} via RStudio. Excel is common but limited for robust statistical analysis.
+  \item Minimal R toolkit suffices: read data, summarise, tabulate, test, model, diagnose.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Why is R preferred over pure spreadsheets for analysis?
+  \item What does RStudio add on top of base R?
+  \item Name two other statistical packages you know.
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Create a new R script. Type the commands below and run them without errors.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+# Reading and peeking at data
+D <- read.csv("yourfile.csv")
+head(D); summary(D)
+
+# Categorical tabulation
+T <- table(D$A, D$B); T
+prop.table(T)      # overall proportions
+prop.table(T, 1)   # row proportions
+prop.table(T, 2)   # column proportions
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Contingency Tables \& Basic Probability}
+
+\begin{corebox}
+\begin{itemize}
+  \item Contingency tables show \textbf{counts} and \textbf{proportions}; treat proportions as probabilities for practice.
+  \item \textbf{Marginal} probabilities are in the margins; \textbf{joint} inside cells; \textbf{conditional} restrict to a row/column.
+  \item Independence fails if \( \Pr(Survival \mid Sex) \ne \Pr(Survival) \).
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Where do marginal probabilities live?
+  \item If total \(= 2092\) and female-survivors \(= 316\), compute \( \Pr(\text{female} \land \text{survived}) \).
+  \item Explain in words why survival and sex are not independent in Titanic data.
+  \item How do you convert a count table to proportions?
+  \item Define ``joint'' vs ``conditional'' probability in one sentence each.
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Using Titanic counts, calculate \( \Pr(S), \Pr(M), \Pr(S \land M), \Pr(S\mid M)\), then check independence.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+# titanic: 2x2 table of counts, rows=sex, cols=survival
+Total <- sum(titanic)
+P <- titanic / Total; P
+# Marginals
+Pr_S <- margin.table(P, 2)["yes"]
+Pr_M <- margin.table(P, 1)["male"]
+# Conditional
+Pr_S_given_M <- P["male","yes"] / Pr_M
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Populations, Parameters, Normal Model (First Look)}
+
+\begin{corebox}
+\begin{itemize}
+  \item \textbf{Population vs sample}; \textbf{parameter} (\(\mu,\sigma\)) vs \textbf{statistic} (\(\bar{y}, s\)).
+  \item Estimation targets parameters; the \textbf{Normal} distribution often models quantitative data.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Give one parameter and its sample-statistic counterpart.
+  \item Why introduce a distributional model like the Normal?
+  \item What do \(\bar{y}\) and \(s\) estimate?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Sketch a bell curve; mark \(\mu\) and \(\pm 2\sigma\). Write what ``about 95\%'' means under Normal.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+x <- rnorm(100, mean=0, sd=1)
+mean(x); sd(x)
+hist(x)  # quick visual
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Confidence Intervals (CIs), Confidence Level, SE, Sample Size}
+
+\begin{corebox}
+\begin{itemize}
+  \item \texttt{t.test()} yields CIs for a mean; increasing \texttt{conf.level} widens the CI.
+  \item Standard error of \(\bar{y}\): \( s/\sqrt{n} \). Larger \(s\) widens; larger \(n\) narrows (all else fixed).
+  \item Design question: choose \(n\) to hit a target margin of error (MOE).
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item How does raising \texttt{conf.level} affect CI width?
+  \item Write SE\((\bar{y})\).
+  \item Two levers to narrow a CI?
+  \item Plain-English meaning of a 95\% CI?
+  \item Why is it unethical to overstate \(n\)?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Run \texttt{t.test(GAG\$conc, conf.level = 0.90/0.95/0.99)}. Which is widest? Why?
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+out95 <- t.test(GAG$conc, conf.level = 0.95)
+out99 <- t.test(GAG$conc, conf.level = 0.99)
+out90 <- t.test(GAG$conc, conf.level = 0.90)
+# Sample-size sketch for MOE (xi) using a pilot s
+z <- qnorm(1-0.05/2); s <- sd(GAG$conc); xi <- 0.04
+n_needed <- ceiling((z*s/xi)^2)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Two Independent Means (Welch Two-Sample t)}
+
+\begin{corebox}
+\begin{itemize}
+  \item Use \texttt{t.test(x, y)} for \textbf{independent groups} (Welch by default): outputs \(t, df, p\), CI, and group means.
+  \item Interpretation: \(p\)-value measures \textbf{incompatibility with \(H_0\)}; \textbf{CI} indicates plausible effect size.
+  \item With small samples, normality matters more; be cautious.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item State \(H_0\) and \(H_A\) for comparing two means.
+  \item What does Welch guard against vs pooled-variance \(t\)?
+  \item Why doesn’t the \(p\)-value tell ``how big'' the effect is?
+  \item Which parameter does the CI estimate here (write \(\mu_1 - \mu_2\))?
+  \item One assumption to check in each group?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Given \texttt{control\$Freq} and \texttt{solitary\$Freq}, run \texttt{t.test(control\$Freq, solitary\$Freq)} and interpret:
+Is 0 inside the CI? Which group mean is higher and by how much (roughly)?
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+out <- t.test(control$Freq, solitary$Freq)
+out$estimate     # group means (mind the order)
+out$conf.int     # CI for mu_control - mu_solitary
+out$p.value
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Paired Data (Within-Subject)}
+
+\begin{corebox}
+\begin{itemize}
+  \item Paired design: each observation in A corresponds to one in B; analyze \textbf{differences}.
+  \item Two equivalent paths: (1) compute differences and one-sample \(t\); (2) \texttt{t.test(A,B, paired=TRUE)}.
+  \item The CI from both approaches is \textbf{identical}; wording differs.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Why analyze paired data via differences?
+  \item What parameter is tested in paired \(t\) (write \(\mu_d\))?
+  \item How do the two outputs differ in wording but not numbers?
+  \item Give a real-world example that should be analyzed as paired.
+  \item What goes wrong if you treat paired observations as independent?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+For auditory/visual reaction times, create a difference variable and run both analyses. Confirm the same CI.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+AV <- read.csv("AV.csv")
+AV$differ <- AV$visual - AV$auditory
+# Option 1
+one <- t.test(AV$differ)
+# Option 2 (equivalent CI)
+two <- t.test(AV$visual, AV$auditory, paired=TRUE)
+one$conf.int; two$conf.int
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Simple Linear Regression (fit → diagnose)}
+
+\begin{corebox}
+\begin{itemize}
+  \item Model: \( y = \beta_0 + \beta_1 x + \varepsilon \). Fitted by least squares (minimise squared residuals).
+  \item Interpret \(\beta_1\) as expected change in \(y\) per 1-unit increase in \(x\) (when sensible).
+  \item Be cautious interpreting \(\beta_0\) if \(x=0\) lies outside observed range.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item In words, what are fitted values and residuals?
+  \item Explain \(\beta_1\) in your own words.
+  \item Why might \(\beta_0\) be uninterpretable in some data sets?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Fit a line predicting possum head length from total length. Write one sentence interpreting \(\beta_1\).
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+m <- lm(head_l ~ total_l, data=possum)
+coef(m); fitted(m); residuals(m)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Checking SLR Assumptions (LINE) with Residuals}
+
+\begin{corebox}
+\begin{itemize}
+  \item Assumptions: \textbf{LINE} = Linearity, Independence, Normality, Equal variance of errors.
+  \item Use \textbf{studentised residuals} and \textbf{residuals vs fitted} to diagnose trend (linearity), funnel (variance), outliers.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Expand LINE.
+  \item Which plot do you look at first to check assumptions?
+  \item High-level meaning of a studentised residual?
+  \item Name one worrying pattern in residuals-vs-fitted.
+  \item Why check assumptions after fitting?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Make the residual plot for the possum model; add a horizontal line at 0. Note any trends or funnels.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+fit <- lm(head_l ~ total_l, data=possum)
+rvf <- rstudent(fit)
+plot(fitted(fit), rvf); abline(h=0)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section*{Fast Review Sheet (pin on your wall)}
+\addcontentsline{toc}{section}{Fast Review Sheet}
+
+\begin{tcolorbox}[colback=SoftBg,colframe=Accent!40!black,breakable,boxrule=0.5pt,arc=2mm]
+\begin{itemize}
+  \item \textbf{Contingency tables} $\rightarrow$ marginal, joint, conditional; independence check: \( \Pr(A\mid B) \stackrel{?}{=} \Pr(A) \).
+  \item \textbf{CIs:} width $\uparrow$ with conf.level $\uparrow$ or $s \uparrow$; width $\downarrow$ with $n \uparrow$.
+  \item \textbf{Welch two-sample $t$} for independent groups; \textbf{paired $t$} for within-subject differences.
+  \item \textbf{SLR:} fit with \texttt{lm(y \textasciitilde\ x)}; check \textbf{LINE} via residual plots and studentised residuals.
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}
