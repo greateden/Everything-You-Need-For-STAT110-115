@@ -1,0 +1,43 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+
+\author{Eden Li}
+\title{STAT110/115 Tutoring Materials – 02 Distributions}
+\date{}
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials }
+\rhead{Distributions}
+%\maketitle
+
+\begin{itemize}
+\item \textbf{Mean of the binary (Bernoulli) distribution}: $$\mu = p$$
+\item \textbf{Variance of the binary (Bernoulli) distribution}: $$\sigma^2 = p (1 - p)$$
+\item \textbf{Difference between binary distribution and binomial distribution}: $$n = 1 \Rightarrow binary \ distribution$$
+$$n > 1 \Rightarrow binomial \ distribution$$
+\textbf{Mean of the binomial distribution}:$$\mu=np$$
+\textbf{Variance of the binomial distribution}:$$\sigma^2 = np(1-p)$$
+\item \textbf{Conditions for binomial distribution}: Outcome is binary. We have n independent trials. The number of trials is fixed. The probability of success $\pi$ must stay constant.
+\item \textbf{Probability of x successes in n trials}: $$ \Pr(X = x) = \binom{n}{x} \pi^x (1 - \pi)^{n - x} $$
+\item Binomial coefficient ($\binom{n}{k}$): $$\frac{n!}{(k!)(n-k)!}$$
+\textbf{Standard normal distribution(Z)}:$$Z \sim N (\mu = 0 ,\sigma^2 = 1)$$
+\item \textbf{$\mu$ (normal distribution) moves the curve but does not change its shape}.
+\item \textbf{$\sigma$ spreads the curve more widely about X = $\mu$ but does not alter the centre}.
+\item \textbf{Compare a relative frequency histogram with a probability distribution}: Relative frequency histogram represents a sample (smaller number of individuals). The probability density function represents a population (a large number of individuals).
+\item \textbf{How to estimate the value of the parameters if estimating a probability distribution curve from a relative frequency histogram}: $\mu$ is estimated by the sample mean. $\sigma$ is estimated by the sample standard deviation, s.
+\item \textbf{What do the areas under the normal distribution curve represent? Probabilities}.
+\item \textbf{What is Z-score (Z-value)? Number of standard deviations away from the mean}.
+\item Any normal distribution value, \textbf{$X \sim N(\mu_X , \sigma^2_X)$}, can be put on the standard normal scale, \textbf{$Z \sim N(0, 1)$}. The Z-score follows a standard normal distribution.
+\item \textbf{Formula for Z-Value}: $$Z = \frac{(X - \mu_X)}{\sigma_X}$$
+\item \textbf{When will the sampling distribution of the mean will follow a normal distribution? If x(the samples, not X) is large enough}.
+\item \textbf{Central Limit Theorem (CLT)}: The sampling distribution derived from a simple random sample will be approximately normally distributed.
+\item \textbf{What is the mean of the sampling distribution? Population mean}, \textbf{$\mu_{\bar{X}} = \mu_X$}.
+\item \textbf{Variance of the sampling distribution}: $$\sigma_{\bar{x}} = \frac{\sigma_x}{\sqrt{n}}$$
+The variability of sample means.
+\item \textbf{Notes on the sampling distribution}: If sample size n is greater, then the standard error of the mean is smaller (more compact distribution, greater precision). If X is normal, then $X_{bar}$ is normal (for any n). If X is not normal, then $X_{bar}$ is approximately normal for large n (central limit theorem).
+\end{itemize}
+\end{document}

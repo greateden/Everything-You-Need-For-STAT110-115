@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\[
+\hat{y}=\hat{\beta}_0+\hat{\beta}_1x
+\]
+\[
+\sum_{i=1}^{n}\hat{e}^2_i = \sum_{i=1}^{n}(y_i - \hat{y}_i )^2
+\]
+
+
+\[
+\hat{\beta}_1 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}
+\]
+
+\[
+\hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}
+\]
+
+\[
+\hat{e}_i = y_i - \hat{y}_i = y_i - (\hat{\beta}_0 + \hat{\beta}_1 x_i) = y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i
+\]
+
+\[
+S^2_e = \frac{1}{n-2}\sum_{i=1}^{n}(\hat{e}^2_i)=\frac{RSS}{n-2}
+\]
+
+\[
+where \ RSS = \sum_{i=1}^{n}\hat{e}^2_i \ is \ the \ residual \ sum \ of \ squares.
+\]
+
+\[
+t = \frac{\text{estimate} - \text{null}}{\text{std. error}}
+\]
+
+\[
+s_{\hat{\beta}_1} = \frac{s_e}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}}
+\]
+
+\[
+t = \frac{\hat{\beta}_1}{s_{\hat{\beta}_1}}
+\]
+
+\[
+PE(\hat{y}_0) = s_e\sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}}
+\]
+
+\[
+\hat{y}_0 \pm t_{(1-\frac{\alpha}{2}, n-2)} \times PE(\hat{y}_0)
+\]
+
+\[
+r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2 \sum_{i=1}^{n}(y_i - \bar{y})^2}}
+\]
+
+\[
+= \frac{S_{xy}}{S_x S_y}
+\]
+
+\[
+TSS = \sum_{i=1}^{n} (y_i - \bar{y})^2
+\]
+
+\[
+RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\]
+
+\[
+R^2 = \frac{ESS}{TSS} = 1 - \frac{RSS}{TSS}
+\]
+
+\[
+\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1x
+\]
+
+\[
+p = \frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}
+\]
+
+\[
+z = x\frac{\hat{\beta}_1}{s_{\hat{\beta}_1}}
+\]
+
+\[
+Y = \beta_0 + \beta_1x_1 + \cdots + \beta_kx_k + e
+\]
+
+\[
+\mu_Y = \beta_0 + \beta_1x_{1} + \cdots + \beta_kx_{k}
+\]
+
+\[
+\sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\]
+
+\[
+RSS = \sum_{i=1}^{n} \hat{e}_i^2
+\]
+
+\[
+s_e^2 = \frac{RSS}{n - k - 1}
+\]
+
+\end{document}

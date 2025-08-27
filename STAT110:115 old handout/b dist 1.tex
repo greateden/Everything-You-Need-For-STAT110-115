@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        no markers, 
+        domain=-3:3, 
+        samples=100, 
+        axis lines*=left, 
+        xlabel=$z$, 
+        ylabel=,
+        height=6cm, 
+        width=12cm, 
+        xtick={-3,-2,-1,0,1,2,3}, 
+        ytick=\empty,
+        enlargelimits=false, 
+        clip=false, 
+        axis on top,
+        grid = major
+    ]
+    \addplot [very thick,cyan!50!black] {exp(-x^2/2)/sqrt(2*pi)};
+    \addplot [name path=A,domain=0:1.64,cyan!50!black] {exp(-x^2/2)/sqrt(2*pi)};
+    \path [name path=B] (axis cs:0,0) -- (axis cs:1.64,0);
+    \addplot [red!50,opacity=0.5] fill between[of=A and B];
+    \node[pin=above right:{\scriptsize \textbf{Probability}}] at (axis cs:1,0.15) {};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

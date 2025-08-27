@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.2cm]{geometry}
+\usepackage{fancyhdr}
+
+\author{Your Name}
+\title{Analytic Studies and Sampling Techniques}
+\date{}
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials }
+\rhead{Confidence Interval}
+
+\begin{itemize}
+\item \textbf{The standard normal critical value for a 95\% interval}: 1.96
+\item \textbf{Confidence interval formula}: $$\bar{x} \pm Z_{(1-\frac{\alpha}{2})} \times \frac{\sigma_X}{\sqrt{n}}$$
+estimate for the mean ± multiplier ± standard error for the mean
+\item \textbf{The standard normal critical value for a 99\% interval}: 2.58
+\item \textbf{Multiplier formula}: $$z = \frac{x - \textbf{mean}}{\textbf{sd}}$$
+\item \textbf{What is the $\alpha$ in the multiplier}: tail probability
+\item \textbf{Multiplier pattern}: when CI is bigger (e.g., 95\% to 99\%), the multiplier will be bigger
+\item \textbf{$s_X$}: sample standard deviation
+\item \textbf{In practice the true standard deviation $\sigma_X$ is not known}: We estimate it with the sample standard deviation.
+\item \textbf{This means our critical values must now come from the 't' distribution, not the standard normal}.
+\item \textbf{$t$ distribution CI}: $$\bar{x} \pm t_{(1-\frac{\alpha}{2}, \nu)} \times \frac{sX}{\sqrt{n}}$$
+\item \textbf{$\nu$ (degree of freedom) for t-distribution}: $\nu = n - 1$
+\item \textbf{The t-distribution will be the correct sampling distribution if}: either the underlying distribution of X is normal, and/or the sample size is sufficiently large (Central Limit Theorem holds).
+\item \textbf{What is the degree of freedom in t-distribution}: to replace the mean and sd in a normal distribution (because t-distribution is always standardised)
+\item \textbf{When to use t-distribution}: when the sample size is small
+\item \textbf{Calculate the estimate sample size when knows the CI}: assuming knows the sd and mean (normally given in the question), solve the equation, rounding UP
+\item \textbf{Comparing means with CI}: $$(\bar{x}_1 - \bar{x}_2) \pm t_{(1-\frac{\alpha}{2}, \nu)} \times \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
+\item \textbf{Using CLT to test appropriate normal distribution}: $$n\pi \pm 3 \sqrt{n\pi (1 - \pi)}$$
+gives two values between 0 and n, if not, then fails the test. This approximation is good only when: n is large, $\pi$ is not close to 0 or 1 (this increases symmetry)
+\item \textbf{Formula for estimating $\pi$}: $$P = \frac{X}{n}$$, $$p = \frac{x}{n}$$, x is the observed value of X. (and more) Using the Central Limit Theorem, the resulting distribution of these proportions is approximately normal if, n is large enough, $\pi$ far enough from 0 or 1. As before, we judge this using: $$n\pi \pm \sqrt{n\pi(1 - \pi)}$$ gives values between 0 and n.
+\item \textbf{Derivation of the mean of the sampling distribution}: If \(P = \frac{X}{n}\), then \(\mu_P = \pi\), \textbf{sd} = \(\sigma_P = \sqrt{\frac{\pi(1 - \pi)}{n}}\)
+\item \textbf{95\% confidence interval for $\pi$} (use the sample proportion (p) to estimate the unknown true population proportion ($\pi$)): $$p \pm 1.96 \sqrt{\frac{p(1 - p)}{n}}$$
+\item \textbf{Margin of error}: $$multipliers * sd$$
+\item \textbf{Note for CI}: This confidence interval (and margin of error) is correct only if the normal approximation to the binomial is appropriate. In practice, bias due to non-response should also be considered in our interpretation of an estimate.
+\end{itemize}
+\end{document}

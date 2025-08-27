@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.2cm]{geometry}
+\usepackage{fancyhdr}
+
+\author{Your Name}
+\title{STAT110/115 Tutoring Materials}
+\date{}
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials }
+\rhead{Probability}
+%\maketitle
+
+\begin{itemize}
+\item \textbf{Subjective Probability}: The individual's personal estimate of the chance of loss.
+\item \textbf{Probability as the Degree of Belief}: In a statement.
+\item \textbf{Objective Probability}: The long-run relative frequency of an event based on the assumptions of an infinite number of observations and of no change in the underlying conditions.
+\item \textbf{Sample Space Definition}: The sample space is the set of all possible outcomes of an experiment, e.g., in the case of a fair die, \{1, 2, 3, 4, 5, 6\}.
+\item \textbf{Complementary Events}: $$Pr(A) + Pr(\bar{A}) = 1$$
+\item \textbf{Mutually Exclusive Events}: There is no intersection between the two events $$Pr(A \cap B) = 0$$ e.g., Māori and Chinese.
+\item \textbf{Conditional Probability Multiplication Rule}: $$Pr(A \cap B) = Pr(A) Pr(B|A)$$
+\item \textbf{Conditional Probability Addition Rule}: $$Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B)$$
+\item \textbf{Independent Events}: The outcome of one event does not affect the outcome of the second event.
+\item \textbf{Independence Check} (true if): $$Pr(B) \neq Pr(B | A)$$ or $$Pr(A) \neq Pr(A | B)$$
+\item \textbf{Definitions of Diagnostic Tests}: Sensitivity, Specificity, False positive fraction, Positive Predictive Value, Negative Predictive Value
+\item \textbf{Sensitivity (Diagnostic Tests)}: $$Pr(B | A)$$ The probability that a person with the disease has a positive test. Think of this as "the probability of a positive test result, given the person actually has the disease.
+\item \textbf{Specificity (Diagnostic Tests)}: $$Pr(\bar{B} | \bar{A})$$ The probability that a person without the disease has a negative test. Think of this as "the probability of a negative test result, given the person does NOT have the disease.
+\item \textbf{Negative Predictive Value}: $$Pr(\bar{A} | \bar{B})$$ The proportion of patients with negative test results who don't have the disease. The proportion of patients with negative test results who are correctly diagnosed.
+\item \textbf{False positive fraction (Diagnostic Tests)}: $$1 - specificity = Pr(\bar{B} | \bar{A})$$
+\item \textbf{Positive Predictive Value}: $$Pr(A | B)$$ The proportion of patients with positive test results who have the disease. The proportion of patients with positive test results who are correctly diagnosed.
+\end{itemize}
+\end{document}

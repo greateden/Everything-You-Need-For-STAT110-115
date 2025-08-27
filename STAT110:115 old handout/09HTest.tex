@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,top=3cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.2cm]{geometry}
+\usepackage{fancyhdr}
+
+\author{Eden Li}
+\title{STAT110/115 Tutoring Materials – 02 Hypothesis Testing}
+\date{}
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{STAT110/115 Tutoring Materials }
+\rhead{Hypothesis Testing}
+%\maketitle
+
+\begin{itemize}
+\item \textbf{$H_0$}: Null hypothesis. The hypothesis is that there is no association, no effect or no difference.
+\item \textbf{$H_A$}: Alternative hypothesis. The hypothesis is that there is an association, effect or difference.
+\item \textbf{P-value}: We measure the "consistency" of the observed data with the claim using a p-value. The p-value is the probability of observing the value of the test statistic, or a value more extreme, calculated under the assumption that $H_0$ is true. A small p-value indicates we would be unlikely to see the data we did if the null hypothesis were true. i.e., the smaller the p-value is, the easier to reject $H_0$. If the p-value is less than $\alpha$ we reject $H_0$. If the p-value is greater than or equal to $\alpha$ we do not reject $H_0$.
+\item \textbf{Test statistic (t - statistic)}: A test statistic is the standardised value of the sample value. 
+$$T = \frac{observed \ sample \ value - null \ value}{estimated \ standard \ error}$$
+When studying hypothesis testing, we usually use $\pi$ to denote the value of the overall parameter, instead of using p.
+\item \textbf{Z Statistic vs t-statistic}:
+\begin{itemize}
+\item Z-statistic: When to use: Large samples (n $>$ 30) or known population standard deviation ($\sigma$). Basis: Uses population standard deviation ($\sigma$).
+\item t-statistic: When to use: Small samples (n $<$ 30) or unknown population standard deviation ($\sigma$). Basis: Uses sample standard deviation (s).
+\end{itemize}
+\item \textbf{How to conduct a hypothesis test}:
+\begin{enumerate}
+\item Set $H_0$ and $H_A$.
+\item Calculate t-statistic(if it is sample) or Z-statistic(if it is population).
+\item Calculate p-value.
+\item Calculate 95\% CI with (3).
+\item Draw a conclusion based on the p-value (reject $H_0$ or not).
+\end{enumerate}
+\item \textbf{The difference between p and p*}:
+\begin{itemize}
+\item p (Sample Proportion): Frequency or proportion of events in a sample. Example: If 50\% support a policy in a sample, ( p = 0.5 ).
+\item p* (Estimate of Overall Proportion): Estimate of the overall proportion based on sample data. Example: If 50\% support a policy in a sample, ( p* = 0.5 ).
+\end{itemize}
+\item \textbf{When to use chi square}: When trying to control groups in experiments - looking for differences between men and women in each group, etc. Looking for differences between categorical variables - maybe you want to know if there is a difference between men and women for their favourite type of ice cream.
+\item \textbf{How to conduct chi-square test}:
+\begin{enumerate}
+\item Define the Null-Hypothesis and Alternative Hypothesis. $H_0$ : The treatment and response are independent (i.e. no association). $H_A$ : The treatment and response are dependent in some way (i.e. there is some association).
+\item Calculating expected cell counts.
+\item Calculating the $\chi^2$ test statistic.
+\item Get the degree of freedom.
+\item Calculate the p-value with R.
+\item Reject / not reject $H_0$.
+\item Draw conclusion.
+\end{enumerate}
+\item \textbf{Expected cell counts}: 
+$$E_{(row \ i, col \ j)} = \frac{r_i \times c_j}{n}$$
+\begin{itemize}
+\item $r_i$ is the row total, for row i
+\item $c_j$ is the column total, for column j 
+\item n is the total number (of trials, patients, etc.)
+\end{itemize}
+We worked out what we would have expected to see under the null hypothesis in each cell given the observed row and column totals.
+\item \textbf{Formula for chi-square:}
+$$\chi^2=\sum_{ij}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}$$
+\item \textbf{Degree of freedom for chi square}: $\nu = (number of rows - 1) * (number of columns - 1)$
+\item \textbf{Range for p-value}: (0, 1)
+\item \textbf{Belief (interpretation/decision):}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+& Fail to reject $H_0$ & Reject $H_0$ \\ \hline
+Null is true & Correct interpretation (No error) & Error (Type I) \\ \hline
+Null is false & Error (Type II) & Correct interpretation (No error) \\
+\hline
+\end{tabular}
+\end{table}
+\item \textbf{Type I error (a false positive result)}: Concluding that there is an association between exposure and outcome, where there is not. Type I error is controlled when we set the significance level (usually 0.05).
+\item \textbf{Type II error (a false negative result)}: Concluding that there is not an association between exposure and outcome, where there is. Type II error is primarily controlled through the sample size. Ideally, power should be between 80 and 90\%.
+\end{itemize}
+\end{document}
