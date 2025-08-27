@@ -2,6 +2,8 @@
 
 A curated set of notes and resources for the University of Otago's **STAT110/115** courses. 
 
+## Check practice_exams/Eden_made for exam-like questions and their solutions!
+
 ## Repository Structure
 - `handouts/` – course handouts in PDF and LaTeX. `new_handout/` contains the latest source; `old_handout/` keeps legacy material including `old_handout.pdf`.
 - `lectures/` – 2025 lecture slides.
