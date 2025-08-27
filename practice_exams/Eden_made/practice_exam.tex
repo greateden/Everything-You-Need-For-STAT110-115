@@ -1,0 +1,461 @@
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+\section*{Questions}
+\textbf{Information for Questions 1--2}\\
+We observe data $y=(12.5,\,15.2,\,14.8,\,13.9,\,16.1)$.
+
+\begin{enumerate}
+\item The sample mean $\bar y$ is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 13.9
+        \item 14.5
+        \item 15.2
+        \item 12.5
+        \item 16.1
+    \end{enumerate}
+\item The sample standard deviation $s$ is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 0.9
+        \item 1.1
+        \item 1.4
+        \item 2.0
+        \item 3.0
+    \end{enumerate}
+\item While browsing past marathon results, we notice a finishing time of $2{:}07{:}30$ in one race. Using only this information, select the best option:
+    \begin{enumerate}[label=\Alph*.]
+        \item This must be an unusually fast time.
+        \item Since it’s one race, this time is typical for marathons.
+        \item We can’t tell if it’s unusual without knowing the distribution of marathon times.
+        \item It is normal that all elite marathons finish under 2:05.
+        \item Every marathon winner finishes at exactly 2:07{:}30.
+    \end{enumerate}
+\item Are variation and uncertainty important concepts in statistics?
+    \begin{enumerate}[label=\Alph*.]
+        \item Yes—models describe variation, and we quantify uncertainty wherever possible.
+        \item No—statistics finds exact population parameters without error.
+        \item Yes—but only to make analysis look sophisticated.
+        \item No—big data eliminates uncertainty.
+        \item No—once data are collected, uncertainty disappears.
+    \end{enumerate}
+
+\textbf{Information for Questions 5--7}\\
+A discrete variable $Y$ takes values $\{1,2,5\}$ with probabilities $0.20,\,0.50,\,0.30$ respectively.
+\item $\Pr(Y\ge 2)$ equals
+    \begin{enumerate}[label=\Alph*.]
+        \item 0.20
+        \item 0.30
+        \item 0.50
+        \item 0.80
+        \item 1.00
+    \end{enumerate}
+\item $E[Y]$ is
+    \begin{enumerate}[label=\Alph*.]
+        \item 2.1
+        \item 2.5
+        \item 2.7
+        \item 3.0
+        \item 3.2
+    \end{enumerate}
+\item Which best describes $E[Y]$?
+    \begin{enumerate}[label=\Alph*.]
+        \item A randomly selected person will have exactly $E[Y]$.
+        \item The expected/average value in repeated sampling from this distribution.
+        \item Half the population will be below $E[Y]$.
+        \item Having exactly $E[Y]$ implies increased risk.
+        \item $Y$ is normally distributed with mean $E[Y]$.
+    \end{enumerate}
+
+\textbf{Information for Questions 8--11}\\
+Let $A$ be ``a customer is a subscriber'' and $B$ be ``they purchase a premium plan''. Suppose $\Pr(A)=0.40$, $\Pr(B\mid A)=0.35$, $\Pr(B\mid A^c)=0.10$.
+\item Best interpretation of $\Pr(B\mid A^c)$:
+    \begin{enumerate}[label=\Alph*.]
+        \item Probability a non-subscriber purchases the premium plan.
+        \item Probability someone is not a subscriber given they purchased.
+        \item Probability a subscriber purchases the premium plan.
+        \item Probability someone is not a subscriber and purchases.
+        \item Probability of purchasing regardless of subscription.
+    \end{enumerate}
+\item $\Pr(A\mid B)$ is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 0.30
+        \item 0.50
+        \item 0.60
+        \item 0.70
+        \item 0.90
+    \end{enumerate}
+\item $\Pr(A\ \text{or}\ B)$ is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 0.20
+        \item 0.40
+        \item 0.46
+        \item 0.55
+        \item 1.00
+    \end{enumerate}
+\item $\Pr(B)$ is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 0.10
+        \item 0.20
+        \item 0.30
+        \item 0.35
+        \item 0.50
+    \end{enumerate}
+\item What is the best description of a random variable?
+    \begin{enumerate}[label=\Alph*.]
+        \item A summary of both population and sample.
+        \item A variable that must be normal.
+        \item A random process with a numerical outcome.
+        \item A fixed but unknown value.
+        \item A value chosen by the analyst.
+    \end{enumerate}
+\item Which is best modelled as continuous?
+    \begin{enumerate}[label=\Alph*.]
+        \item Number of emails received today.
+        \item Count of customers who clicked ``Buy''.
+        \item CO$_2$ concentration in air (ppm).
+        \item Number of red cards in a match.
+        \item Count of goals in a game.
+    \end{enumerate}
+
+\textbf{Information for Questions 14--15}\\
+Let $X$ and $Y$ be independent with $E[X]=8$, $\mathrm{Var}(X)=1.2$ and $E[Y]=5$, $\mathrm{Var}(Y)=0.8$. Define the score $S=3X-2Y$.
+\item $E[S]$ is
+    \begin{enumerate}[label=\Alph*.]
+        \item 6
+        \item 10
+        \item 12
+        \item 14
+        \item 16
+    \end{enumerate}
+\item The standard deviation of $S$, $sd(S)$, is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 1.10
+        \item 2.24
+        \item 3.74
+        \item 4.50
+        \item 6.00
+    \end{enumerate}
+
+\textbf{Information for Questions 16--19}\\
+A test score $Y\sim \mathcal N(\mu=70,\ \sigma=12)$ for healthy adults.
+\item A person has $z=-0.75$. Their score is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 52.0
+        \item 58.0
+        \item 61.0
+        \item 70.0
+        \item 79.0
+    \end{enumerate}
+\item Which R command computes $\Pr(Y>82)$?
+    \begin{enumerate}[label=\Alph*.]
+        \item 1 - pnorm(82)
+        \item 1 - pnorm(1.0)
+        \item pnorm(82)
+        \item pnorm(1.0)
+        \item 1 - pnorm(-1.0)
+    \end{enumerate}
+\item If $n=100$ independent adults are sampled, the sampling distribution of $\bar Y$ is
+    \begin{enumerate}[label=\Alph*.]
+        \item Normal, mean 70, sd 12
+        \item Normal, mean 70, sd 1.2
+        \item Normal, mean 0, sd 1
+        \item $t$ with 99 df
+        \item Unknown
+    \end{enumerate}
+\item If the population is not normal but not extremely skewed (still $\mu=70,\sigma=12$), for $n=100$ the sampling distribution of $\bar Y$ is approximately
+    \begin{enumerate}[label=\Alph*.]
+        \item Normal, mean 70, sd 12
+        \item Normal, mean 70, sd 1.2
+        \item Normal, mean 0, sd 1
+        \item $t$ with 99 df
+        \item Unknown
+    \end{enumerate}
+
+\textbf{Information for Questions 20--22}\\
+A researcher measures a continuous outcome with unknown $\sigma$. Sample size $n=25$. Data look roughly normal.
+\item A 95\% CI for $\mu$ should be
+    \begin{enumerate}[label=\Alph*.]
+        \item $\hat p \pm z_{0.975}\sqrt{\hat p(1-\hat p)/n}$
+        \item $\bar y \pm z_{0.975}\,\sigma/\sqrt n$
+        \item $\mu \pm z_{0.975}\,\sigma/\sqrt n$
+        \item $\bar y \pm z_{0.975}\, s/\sqrt n$
+        \item $\bar y \pm t_{24,0.975}\, s/\sqrt n$
+    \end{enumerate}
+\item If we raise confidence from 95\% to 99\%, what changes?
+    \begin{enumerate}[label=\Alph*.]
+        \item Estimate changes; unclear effect on width
+        \item Standard error changes; interval wider
+        \item Standard error changes; interval narrower
+        \item Multiplier changes; interval wider
+        \item Multiplier changes; interval narrower
+    \end{enumerate}
+\item A 99\% CI for $\mu$ is $(3.54,\ 3.82)$. Best interpretation:
+    \begin{enumerate}[label=\Alph*.]
+        \item 99\% of individual observations lie in $(3.54,3.82)$.
+        \item A random future observation has 99\% chance to lie in $(3.54,3.82)$.
+        \item There is probability 0.99 that the fixed $\mu$ is in $(3.54,3.82)$.
+        \item 99\% of sample means fall in $(3.54,3.82)$.
+        \item We are 99\% confident the true mean lies in $(3.54,3.82)$.
+    \end{enumerate}
+\item For $H_0:\mu=\mu_0$ vs $H_A:\mu\neq \mu_0$, with $\alpha=0.01$ and $p=10^{-6}$:
+    \begin{enumerate}[label=\Alph*.]
+        \item Very small $p$ means a very large effect size must exist.
+        \item We can be certain $\mu\neq\mu_0$.
+        \item Data would be very unlikely if $H_0$ were true.
+        \item $\Pr(\mu=\mu_0)=10^{-6}$.
+        \item $\Pr(\text{our calculations are correct})=10^{-6}$.
+    \end{enumerate}
+\item Which best describes estimation?
+    \begin{enumerate}[label=\Alph*.]
+        \item Assume population mean equals sample mean.
+        \item Compute SE as $s/\sqrt n$.
+        \item Use population data to compute a statistic.
+        \item Guess data values to improve model fit.
+        \item Use a statistic to make an informed guess about an unknown parameter.
+    \end{enumerate}
+
+\textbf{Information for Questions 25--26}\\
+The R object \texttt{otter} has variables \texttt{weight} (kg) and \texttt{length} (cm).
+\item What does \texttt{mean(otter$weight)} compute?
+    \begin{enumerate}[label=\Alph*.]
+        \item Sample mean of length
+        \item Sample sd of length
+        \item Sample mean of weight
+        \item Sample sd of weight
+        \item Median weight
+    \end{enumerate}
+\item What does \texttt{sd(otter$length)} compute?
+    \begin{enumerate}[label=\Alph*.]
+        \item Sample mean of length
+        \item Sample sd of length
+        \item Sample mean of weight
+        \item Sample sd of weight
+        \item Median length
+    \end{enumerate}
+
+\textbf{Information for Questions 27--30 (Paired data)}\\
+Thirty patients’ stress hormone levels are recorded before and after mindfulness training. R output:
+
+\texttt{t = -2.57, df = 29, p-value = 0.012}\\
+\texttt{95 percent CI for mean difference (after - before): (-1.15, -0.15)}\\
+\texttt{mean difference = -0.65}
+\item With $\alpha=0.05$, best interpretation:
+    \begin{enumerate}[label=\Alph*.]
+        \item Since $p < \alpha$, the data would be unusual if there were truly no mean difference.
+        \item Since $p < \alpha$, the true after-level is 0.
+        \item Since $p < \alpha$, the data would not be unusual under no difference.
+        \item Since $p > \alpha$, there’s no change.
+        \item Therefore mindfulness should be mandatory.
+    \end{enumerate}
+\item Which model is used?
+    \begin{enumerate}[label=\Alph*.]
+        \item Normal model with paired data
+        \item Normal model with two independent groups
+        \item Chi-squared test
+        \item Linear regression
+        \item Binomial model
+    \end{enumerate}
+\item In this context, power is
+    \begin{enumerate}[label=\Alph*.]
+        \item $\Pr(H_0\ \text{true})$
+        \item $\Pr(\text{reject }H_0 \mid H_0\ \text{true})$
+        \item $\Pr(\text{reject }H_0 \mid H_A\ \text{true})$
+        \item Same as the p-value
+        \item $\Pr(p<0.05)$ without context
+    \end{enumerate}
+\item Which definitely increases power?
+    \begin{enumerate}[label=\Alph*.]
+        \item Setting \texttt{paired = TRUE} in any test
+        \item Increasing $\alpha$ and decreasing $n$
+        \item Decreasing $\alpha$
+        \item Repeating identical tests without more data
+        \item Increasing the sample size
+    \end{enumerate}
+\textbf{Information for Questions 31--33 (Two independent groups)}\\
+Two drugs are compared on blood pressure reduction. Group 1 (Drug A): $\bar y_1=23.4$, $s_1=5.8$, $n_1=45$. Group 2 (Drug B): $\bar y_2=20.1$, $s_2=6.2$, $n_2=40$.
+\item The estimated standard error of $\bar y_1-\bar y_2$ is closest to
+    \begin{enumerate}[label=\Alph*.]
+        \item 0.95
+        \item 1.10
+        \item 1.31
+        \item 1.60
+        \item 2.00
+    \end{enumerate}
+\item A two-sided test of equal means gives $t\approx 2.52$ with $p \approx 0.013$. At $\alpha=0.05$, we should
+    \begin{enumerate}[label=\Alph*.]
+        \item Fail to reject; no evidence of a difference.
+        \item Reject; evidence of a difference.
+        \item Conclude Drug B is superior.
+        \item Conclude both drugs are identical in effect.
+        \item Need a paired test instead.
+    \end{enumerate}
+\item A plausible 95\% CI for $\mu_1-\mu_2$ is
+    \begin{enumerate}[label=\Alph*.]
+        \item $(-5.9,\ -0.7)$
+        \item $(-0.7,\ 5.9)$
+        \item $(0.7,\ 5.9)$
+        \item $(1.3,\ 6.5)$
+        \item $(3.3,\ 6.0)$
+    \end{enumerate}
+
+\textbf{Information for Questions 34--36 (Proportions)}\\
+In $n=150$ visitors, $x=45$ purchased.
+\item A 95\% CI for the proportion $p$ should be
+    \begin{enumerate}[label=\Alph*.]
+        \item $\bar y \pm t\,s/\sqrt n$
+        \item $\hat p \pm z\,\sqrt{\hat p(1-\hat p)/n}$
+        \item $\hat p \pm t\,\sqrt{\hat p(1-\hat p)/n}$
+        \item $\mu \pm z\,\sigma/\sqrt n$
+        \item Not possible without $\sigma$
+    \end{enumerate}
+\item If we increase $n$ from 150 to 600 (same $\hat p$), the CI width
+    \begin{enumerate}[label=\Alph*.]
+        \item Doubles
+        \item Stays the same
+        \item Halves
+        \item Becomes four times wider
+        \item Is unpredictable
+    \end{enumerate}
+\item A 90\% CI for $p$ is $(0.22,\ 0.36)$. Best interpretation:
+    \begin{enumerate}[label=\Alph*.]
+        \item 90\% of individuals have outcomes in this range.
+        \item There’s a 90\% chance the random future sample proportion lies in this range.
+        \item We are 90\% confident the true population proportion lies between 0.22 and 0.36.
+        \item 90\% of possible samples will produce $\hat p$ equal to 0.29.
+        \item $p$ varies from study to study.
+    \end{enumerate}
+
+\textbf{Normal tools in R}\\
+\item Which gives $\Pr(Z>1.2)$ for $Z\sim\mathcal N(0,1)$?
+    \begin{enumerate}[label=\Alph*.]
+        \item pnorm(1.2)
+        \item pnorm(-1.2)
+        \item 1 - pnorm(1.2)
+        \item 1 - pnorm(-1.2)
+        \item pnorm(0)
+    \end{enumerate}
+\item Which gives the 97.5th percentile of $Z\sim\mathcal N(0,1)$?
+    \begin{enumerate}[label=\Alph*.]
+        \item qnorm(0.025)
+        \item qnorm(0.975)
+        \item pnorm(0.975)
+        \item 1 - qnorm(0.975)
+        \item qnorm(1.975)
+    \end{enumerate}
+\item Which best describes a random sample?
+    \begin{enumerate}[label=\Alph*.]
+        \item Every unit is selected with equal probability and independently (or via a valid random design).
+        \item The most convenient units are selected.
+        \item Units chosen until results look ``about right''.
+        \item Units with the largest values are over-sampled deliberately (without model).
+        \item Volunteers only.
+    \end{enumerate}
+\item Which action reduces the standard error of $\bar Y$?
+    \begin{enumerate}[label=\Alph*.]
+        \item Halving $n$
+        \item Doubling $n$
+        \item Quadrupling $n$
+        \item Doubling $s$
+        \item None of the above
+    \end{enumerate}
+\item Which is a parameter, not a statistic?
+    \begin{enumerate}[label=\Alph*.]
+        \item Sample mean sodium $=3.4$ mg
+        \item Sample sd $=1.1$ mg
+        \item Population mean sodium $\mu$
+        \item $\bar y$ from a study of 40 people
+        \item The sample median
+    \end{enumerate}
+\item Suppose $\sigma=8$, $n=64$, $\bar y=102$, $H_0:\mu=100$. The two-sided $p$-value equals
+    \begin{enumerate}[label=\Alph*.]
+        \item pnorm(2)
+        \item $2 * (1 - \text{pnorm}(2))$
+        \item $1 - \text{pnorm}(2)$
+        \item pnorm(-2)
+        \item $2 * \text{pnorm}(2)$
+    \end{enumerate}
+\item When should a paired $t$-test be preferred over a two-sample $t$-test?
+    \begin{enumerate}[label=\Alph*.]
+        \item When two groups are independent.
+        \item When measurements are ``before–after'' on the same units.
+        \item When one group is twice as large.
+        \item When variances are equal.
+        \item When sample sizes are both $\ge 30$.
+    \end{enumerate}
+\item Even if the population is not normal, the distribution of $\bar Y$ is approximately normal when
+    \begin{enumerate}[label=\Alph*.]
+        \item $n$ is large (and the population isn’t extremely skewed).
+        \item $s=0$.
+        \item $n=2$.
+        \item We take medians instead.
+        \item Only if the population is uniform.
+    \end{enumerate}
+\item For $Y\sim\mathcal N(100,15^2)$, which R command gives the 90th percentile?
+    \begin{enumerate}[label=\Alph*.]
+        \item qnorm(0.1, 100, 15)
+        \item pnorm(0.9, 100, 15)
+        \item qnorm(0.9, mean=100, sd=15)
+        \item 1 - qnorm(0.9, 100, 15)
+        \item qnorm(1.9, 100, 15)
+    \end{enumerate}
+\item Which statement about the sampling distribution of $\bar Y$ is correct?
+    \begin{enumerate}[label=\Alph*.]
+        \item Mean is $\mu$, standard error is $\sigma\sqrt n$.
+        \item Mean is $\bar y$, standard error is $s/\sqrt n$.
+        \item Mean is $\mu$, standard error is $\sigma/\sqrt n$.
+        \item Mean is 0, standard error is 1.
+        \item It is never approximately normal.
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+\section*{Solutions}
+\begin{enumerate}
+\item B. 14.5. $\bar y=(12.5+15.2+14.8+13.9+16.1)/5=72.5/5=14.5$.
+\item C. 1.4. Compute $s$ (unbiased, $n-1$ in denominator); $s\approx 1.37$, closest is 1.4.
+\item C. We need the distribution (range/variability) of times to judge “unusual”.
+\item A. Models describe variability; we quantify uncertainty (confidence, p-values, etc.).
+\item D. 0.50+0.30=0.80.
+\item C. $E[Y]=1(0.20)+2(0.50)+5(0.30)=0.2+1.0+1.5=2.7$.
+\item B. It’s the long-run average under the distribution.
+\item A. Probability a non-subscriber purchases the premium plan.
+\item D. $\Pr(A\mid B)=\dfrac{0.35\cdot 0.40}{0.35\cdot 0.40+0.10\cdot 0.60}=0.14/0.20=0.70$.
+\item C. $\Pr(A\cup B)=\Pr(A)+\Pr(B)-\Pr(A\cap B)=0.40+0.20-0.14=0.46$.
+\item B. $\Pr(B)=0.35(0.40)+0.10(0.60)=0.14+0.06=0.20$.
+\item C. A random process with a numerical outcome.
+\item C. CO$_2$ concentration is continuous (in practice, measured on a continuum).
+\item D. $E[3X-2Y]=3(8)-2(5)=24-10=14$.
+\item C. $\mathrm{Var}(3X-2Y)=9(1.2)+4(0.8)=10.8+3.2=14$; $sd=\sqrt{14}\approx 3.74$.
+\item C. $y=\mu+z\sigma=70+(-0.75)\cdot 12=70-9=61$.
+\item B. $z=(82-70)/12=1.0$; $\Pr(Y>82)=1-\Phi(1.0)= 1 - \text{pnorm}(1.0)$.
+\item B. $\bar Y\sim\mathcal N(70,\ (12/\sqrt{100})^2) \Rightarrow sd =1.2$.
+\item B. By CLT, approximately normal with mean 70, sd $12/\sqrt{100}=1.2$.
+\item E. With unknown $\sigma$, smallish $n=25$, use $t$: $\bar y \pm t_{24,0.975}\,s/\sqrt n$.
+\item D. Only the multiplier changes (larger), making the interval wider.
+\item E. Confidence refers to the true mean lying in the interval.
+\item C. A tiny $p$-value indicates data are very unlikely under $H_0$.
+\item E. Estimation uses a statistic (e.g., $\bar y$) to infer a parameter (e.g., $\mu$).
+\item C. The sample mean of weight.
+\item B. The sample standard deviation of length.
+\item A. Since $p=0.012<0.05$, data would be unusual if there were truly no difference.
+\item A. Paired $t$-test (normal model for paired differences).
+\item C. Power $=\Pr(\text{reject }H_0\mid H_A\text{ true})$.
+\item E. Increasing sample size increases power (all else equal).
+\item C. $\mathrm{SE}=\sqrt{s_1^2/n_1+s_2^2/n_2}=\sqrt{5.8^2/45+6.2^2/40}\approx 1.31$.
+\item B. With $p\approx 0.013<0.05$, reject $H_0$; there is evidence of a difference.
+\item C. $95\%$ CI $\approx 3.3 \pm 1.96\times 1.31 \approx (0.7,5.9)$.
+\item B. For a single proportion: $\hat p \pm z\,\sqrt{\hat p(1-\hat p)/n}$.
+\item C. Width scales with $1/\sqrt n$. $n \times 4 \Rightarrow$ width $\times 1/2$.
+\item C. Confidence speaks to the population proportion.
+\item C. $\Pr(Z>1.2)=1-\Phi(1.2)= 1 - \text{pnorm}(1.2)$.
+\item B. 97.5th percentile is $\text{qnorm}(0.975)$.
+\item A. Random sampling requires a legitimate random mechanism (independence/equal chance).
+\item C. Quadrupling $n$ halves $s/\sqrt n$.
+\item C. $\mu$ is a parameter (population quantity).
+\item B. $z=(102-100)/(8/\sqrt{64})=2$; two-sided $p =2(1-\Phi(2))$.
+\item B. Paired test for before–after on the same units.
+\item A. CLT: for large $n$, $\bar Y$ approximately normal (non-extreme skewness).
+\item C. qnorm(0.9, mean=100, sd=15).
+\item C. Mean $\mu$, standard error $\sigma/\sqrt n$.
+\end{enumerate}
+\end{document}
