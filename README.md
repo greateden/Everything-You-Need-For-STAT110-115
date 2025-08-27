@@ -13,4 +13,8 @@ A curated set of notes and resources for the University of Otago's **STAT110/115
 Feel free to download any of the PDFs or adapt the LaTeX sources for personal study.
 
 ## License
-2024–2025 © Eden Li. Released under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
+Unless otherwise noted, 2024–2025 © Eden Li. Original content in this repository is released under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
+
+Some materials in this repository (e.g., lecture slides, exam questions, images, or handouts) are provided by University of Otago staff and other authors. Those third‑party files retain their original copyrights and licenses and are **not** covered by the license above. Where possible, the original source/author and terms are indicated in the file or folder.
+
+If you are a rightsholder and would like any third‑party material removed, please email **liyitiangrumm@icloud.com**. I will arrange prompt removal.
