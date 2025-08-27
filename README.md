@@ -1,6 +1,6 @@
 # STAT110/115 Study Materials
 
-A curated set of notes and resources for the University of Otago's **STAT110/115** courses. The repository groups files into folders so tutees can quickly find what they need.
+A curated set of notes and resources for the University of Otago's **STAT110/115** courses. 
 
 ## Repository Structure
 - `handouts/` – course handouts in PDF and LaTeX. `new_handout/` contains the latest source; `old_handout/` keeps legacy material including `old_handout.pdf`.
