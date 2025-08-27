@@ -3,12 +3,22 @@
 % ---------- Preamble: layout & typography ----------
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{amsmath,amssymb}
 \usepackage{enumitem}
 \usepackage{tabularx,booktabs}
 \usepackage{graphicx}
 \usepackage{hyperref}
+% Sanitize bookmark/ToC strings (avoid color/math in PDF strings)
+\pdfstringdefDisableCommands{%%
+  \def\color#1{}%%
+  \def\textbf#1{#1}%%
+  \def\emph#1{#1}%%
+  \def\textrightarrow{}%%
+}
 \hypersetup{
   colorlinks=true,
   linkcolor=MidnightBlue,
@@ -32,9 +42,10 @@
 
 % ---------- Headings ----------
 \titleformat{\section}
-  {\Large\bfseries\color{Accent}}{Lecture \thesection}{0.6em}{—\ }
+  {\Large\bfseries\color{Accent}}{Lecture \thesection}{0.6em}{}
 \titleformat{\subsection}
   {\bfseries}{\thesubsection}{0.6em}{}
+
 
 % ---------- Header / Footer ----------
 \pagestyle{fancy}
@@ -380,7 +391,7 @@ one$conf.int; two$conf.int
 \reviewticks
 
 % =========================================================
-\section{Simple Linear Regression (fit → diagnose)}
+\section{Simple Linear Regression (fit -> diagnose)}
 
 \begin{corebox}
 \begin{itemize}
@@ -411,6 +422,7 @@ coef(m); fitted(m); residuals(m)
 
 \reviewticks
 
+% =========================================================
 % =========================================================
 \section{Checking SLR Assumptions (LINE) with Residuals}
 
@@ -446,15 +458,428 @@ plot(fitted(fit), rvf); abline(h=0)
 \reviewticks
 
 % =========================================================
+\section{Sampling Distributions and Central Limit Theorem (CLT)}
+
+\begin{corebox}
+\begin{itemize}
+  \item A sampling distribution is the distribution of a statistic (for example, \(\bar y\)) under repeated sampling.
+  \item CLT (informal): for large \(n\), the sampling distribution of \(\bar y\) is approximately Normal with mean \(\mu\) and SE \(s/\sqrt{n}\), regardless of the population shape (mild conditions).
+  \item Standard error connects sample size and variability: larger \(n\) leads to smaller SE and tighter CIs.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Define sampling distribution in one sentence.
+  \item State the CLT informally for the sample mean.
+  \item How does SE(\(\bar y\)) scale with \(n\)?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Simulate 2000 sample means from a skewed distribution (for example, Exponential). Make a histogram and compare with a Normal curve.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+set.seed(1)
+means <- replicate(2000, mean(rexp(50, rate = 1)))
+hist(means, breaks = 30, main = "Sampling distribution of ybar")
+mean(means); sd(means)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Proportions and the Binomial Model}
+
+\begin{corebox}
+\begin{itemize}
+  \item Binary outcomes (success or failure) can be modelled with Binomial(\(n, p\)).
+  \item Sample proportion \(\hat p = X/n\) estimates \(p\); \(\operatorname{SE}(\hat p) \approx \sqrt{\hat p(1-\hat p)/n}\).
+  \item Normal approximation works when \(np\) and \(n(1-p)\) are not too small.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Define \(\hat p\) and its approximate SE.
+  \item When is the Normal approximation to the Binomial reasonable?
+  \item Give a real example where a proportion is the right summary.
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+From 250 patients, 37 show a side effect. Compute \(\hat p\) and an approximate 95\% CI.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+x <- 37; n <- 250
+phat <- x/n
+se <- sqrt(phat*(1-phat)/n)
+ci <- phat + c(-1,1)*qnorm(0.975)*se
+phat; ci
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{One-Sample Proportion: Confidence Interval and Test}
+
+\begin{corebox}
+\begin{itemize}
+  \item CI for \(p\): \texttt{prop.test(x, n)} gives an approximate (Wilson-like) CI; \texttt{binom.test} gives an exact CI.
+  \item Hypothesis test for \(p\) with null \(p_0\): z (approximate) or exact binomial test.
+  \item Report both \(\hat p\) and the CI; p-value addresses compatibility with \(H_0\).
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Which R function gives an exact binomial test and CI?
+  \item In words, what does a small p-value tell you about \(H_0\)?
+  \item Why can an exact method be preferable with small \(n\)?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Test whether the true adverse-event rate differs from 10\% when \(x=37, n=250\).
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+binom.test(37, 250, p = 0.10)
+prop.test(37, 250, p = 0.10, correct = TRUE)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Two Proportions: Difference, CI, and Test}
+
+\begin{corebox}
+\begin{itemize}
+  \item Compare \(p_1 - p_2\) with a two-sample test for proportions; use \texttt{prop.test(x = c(x1,x2), n = c(n1,n2))}.
+  \item Report the CI for \(p_1 - p_2\) and interpret direction and magnitude.
+  \item Avoid over-interpreting p-values without effect-size context.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Write the parameter of interest for two proportions.
+  \item Name one assumption that justifies the Normal approximation here.
+  \item What does it mean if 0 is inside the CI for \(p_1 - p_2\)?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Group A: 18/120 successes; Group B: 29/150. Test for a difference and give the 95\% CI.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+prop.test(x = c(18,29), n = c(120,150))
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Association in 2x2 Tables: Risk Difference, Risk Ratio, Odds Ratio}
+
+\begin{corebox}
+\begin{itemize}
+  \item Risk difference (RD): \(p_1 - p_2\). Risk ratio (RR): \(p_1/p_2\). Odds ratio (OR): \(\frac{p_1/(1-p_1)}{p_2/(1-p_2)}\).
+  \item Interpretation depends on design (cohort vs case-control). OR approximates RR when outcomes are rare.
+  \item Always report context and time frame.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Define RD, RR, and OR.
+  \item When is OR approximately equal to RR?
+  \item Give one pitfall when interpreting ratios.
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+From a 2x2 table, compute RD, RR, and OR. Which is most interpretable for patients in your context?
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+# Suppose tab is matrix(c(a,b,c,d), nrow=2, byrow=TRUE)
+prop <- prop.table(tab, 1)
+p1 <- prop[1,2]; p2 <- prop[2,2]
+RD <- p1 - p2
+RR <- p1 / p2
+OR <- (p1/(1-p1)) / (p2/(1-p2))
+c(RD=RD, RR=RR, OR=OR)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Study Design: Experiments vs Observational, Bias and Confounding}
+
+\begin{corebox}
+\begin{itemize}
+  \item Randomisation, control, and blinding reduce bias; observational studies are vulnerable to confounding.
+  \item Always state the unit of analysis, sampling frame, and inclusion or exclusion criteria.
+  \item Association is not causation; consider DAG-like thinking to name potential confounders.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item One difference between experimental and observational designs.
+  \item Define confounding in one sentence.
+  \item Name two common sources of bias.
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Take a claim from news or social media. Identify whether the underlying study is experimental or observational and list likely confounders.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+# Simple random sample indices
+i <- sample.int(nrow(D), size = 100)
+D_s <- D[i,]
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Errors, Power, and Planning}
+
+\begin{corebox}
+\begin{itemize}
+  \item Type I error (false positive) rate is set by \(\alpha\); Type II error relates to \(1 - \)power.
+  \item Power increases with larger effects, larger \(n\), smaller variability, and higher \(\alpha\) (trade-offs apply).
+  \item Pre-specify hypotheses and primary outcomes to avoid p-hacking.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Define power in words.
+  \item Name two knobs that increase power (holding others fixed).
+  \item Why is multiple testing dangerous without correction?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Sketch how the required \(n\) changes when the target effect size halves (qualitatively). What happens to power if \(n\) stays fixed?
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+# Crude simulation of power for a one-sample t under mean shift
+delta <- 0.3; n <- 40; B <- 1000
+pvals <- replicate(B, t.test(rnorm(n, mean=delta, sd=1))$p.value)
+mean(pvals < 0.05)  # approximate power
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Correlation (Pearson r) and Scatterplots}
+
+\begin{corebox}
+\begin{itemize}
+  \item Pearson r measures linear association (from -1 to 1); it is unitless and symmetric in x and y.
+  \item Nonlinear patterns can yield r near 0 even when variables are strongly related.
+  \item Outliers can distort r; always inspect the scatterplot.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item What does the sign and magnitude of r indicate?
+  \item Why must you always look at the scatterplot before trusting r?
+  \item Give one situation where r is inappropriate.
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Compute r between two quantitative variables and draw the scatterplot. Describe form, strength, and outliers.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+plot(D$x, D$y)
+cor(D$x, D$y)
+cor.test(D$x, D$y)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Transformations and Nonlinearity}
+
+\begin{corebox}
+\begin{itemize}
+  \item Log or square-root transforms can stabilise variance and linearise relationships.
+  \item Interpret coefficients on the transformed scale carefully (for example, log-y implies multiplicative effects).
+  \item Compare residual plots before and after transformation.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Name one reason to take logs of y.
+  \item After logging y, how would you interpret a slope of 0.07?
+  \item What visual cue in residuals-versus-fitted suggests a variance problem?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Fit models with y and with log(y); compare residual diagnostics and R output.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+m1 <- lm(y ~ x, data=D)
+m2 <- lm(log(y) ~ x, data=D)
+par(mfrow=c(1,2))
+plot(fitted(m1), rstudent(m1)); abline(h=0)
+plot(fitted(m2), rstudent(m2)); abline(h=0)
+par(mfrow=c(1,1))
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Outliers, Leverage, and Influence}
+
+\begin{corebox}
+\begin{itemize}
+  \item Leverage points have unusual x; influential points change fit noticeably (for example, large Cook distance).
+  \item Check hat values and Cook distance; diagnose, then justify any exclusions transparently.
+  \item Refit with and without suspicious points and compare conclusions.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Distinguish leverage and influence.
+  \item Name two diagnostics for influence.
+  \item Why is pre-specifying exclusion rules important?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Identify the top three most influential observations in your regression and inspect their raw records.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+fit <- lm(y ~ x, data=D)
+h <- hatvalues(fit)
+cd <- cooks.distance(fit)
+head(sort(cd, decreasing=TRUE), 3)
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{Prediction and Intervals in Regression}
+
+\begin{corebox}
+\begin{itemize}
+  \item Use \texttt{predict(..., interval="confidence")} for mean response; use \texttt{interval="prediction"} for a new individual.
+  \item Prediction intervals are wider than confidence intervals.
+  \item Do not extrapolate far beyond observed x.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item Difference between a confidence interval for the mean response and a prediction interval.
+  \item Why are prediction intervals wider?
+  \item What is extrapolation and why is it risky?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Fit an SLR and compute both CI and PI at x values near the center of your data. Compare widths.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+fit <- lm(y ~ x, data=D)
+new <- data.frame(x = c(10, 20))
+conf <- predict(fit, new, interval = "confidence")
+pred <- predict(fit, new, interval = "prediction")
+conf; pred
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
+\section{ANOVA (Concept) and Categorical Predictors}
+
+\begin{corebox}
+\begin{itemize}
+  \item One-way ANOVA tests equality of k group means; equivalent to regression with k-1 dummy variables.
+  \item Assumptions mirror SLR errors: independence, Normality within groups, equal variances.
+  \item Report group means with CIs and the overall F test; follow up with planned contrasts where relevant.
+\end{itemize}
+\end{corebox}
+
+\begin{recallbox}
+\begin{enumerate}
+  \item What does one-way ANOVA test?
+  \item Name the error assumptions for ANOVA.
+  \item How do you represent a 4-level factor in regression?
+\end{enumerate}
+\end{recallbox}
+
+\begin{practicebox}
+Run one-way ANOVA for y across a 3-level factor and show group means with 95\% CIs.
+\end{practicebox}
+
+\begin{rbox}
+\begin{lstlisting}[language=R]
+fit <- aov(y ~ group, data=D)
+summary(fit)
+aggregate(y ~ group, data=D, FUN=mean)
+T <- TukeyHSD(fit)
+T
+\end{lstlisting}
+\end{rbox}
+
+\reviewticks
+
+% =========================================================
 \section*{Fast Review Sheet (pin on your wall)}
 \addcontentsline{toc}{section}{Fast Review Sheet}
 
 \begin{tcolorbox}[colback=SoftBg,colframe=Accent!40!black,breakable,boxrule=0.5pt,arc=2mm]
 \begin{itemize}
-  \item \textbf{Contingency tables} $\rightarrow$ marginal, joint, conditional; independence check: \( \Pr(A\mid B) \stackrel{?}{=} \Pr(A) \).
-  \item \textbf{CIs:} width $\uparrow$ with conf.level $\uparrow$ or $s \uparrow$; width $\downarrow$ with $n \uparrow$.
-  \item \textbf{Welch two-sample $t$} for independent groups; \textbf{paired $t$} for within-subject differences.
-  \item \textbf{SLR:} fit with \texttt{lm(y \textasciitilde\ x)}; check \textbf{LINE} via residual plots and studentised residuals.
+  \item \textbf{Probability and tables:} marginal / joint / conditional; independence check: \( \Pr(A\mid B) \stackrel{?}{=} \Pr(A) \). For 2x2, also report \textbf{RD}, \textbf{RR}, \textbf{OR} (when events are rare, \(\mathrm{OR} \approx \mathrm{RR}\)).
+  \item \textbf{Sampling and CLT:} the sampling distribution of \(\bar y\) is approximately Normal for large \(n\); \(\mathrm{SE}(\bar y) = s/\sqrt{n}\).
+  \item \textbf{CIs and SEs:} width increases with conf.level or \(s\); width decreases with \(n\). For a proportion \(\hat p\): \(\mathrm{SE}(\hat p) \approx \sqrt{\hat p(1-\hat p)/n}\).
+  \item \textbf{Means:} one-sample \(t\) for a mean; \textbf{Welch two-sample \(t\)} for independent groups; \textbf{paired \(t\)} on differences for within-subject designs. Always report estimate, CI, and a one-sentence practical interpretation.
+  \item \textbf{SLR:} model \(y = \beta_0 + \beta_1 x + \varepsilon\). Interpret \(\beta_1\) as change in \(y\) per 1-unit increase in \(x\); \(\beta_0\) may be non-sensical if \(x=0\) is outside the data. Check \textbf{LINE}; inspect residuals, leverage, and Cook distance.
+  \item \textbf{Prediction vs confidence:} \verb|predict(..., interval="confidence")| is for the mean response; \verb|interval="prediction"| is for a new individual (wider).
+  \item \textbf{Power and planning:} power increases with larger effects, larger \(n\), smaller variability, and higher \(\alpha\) (trade-offs). Pre-specify outcomes; avoid p-hacking.
+  \item \textbf{Minimal R verbs to remember:} \verb|t.test(...)|; \verb|prop.test(...)| / \verb|binom.test(...)|; \verb|table| and \verb|prop.table|; \verb|lm(y~x)|; \verb|plot(fitted(), rstudent())|; \verb|predict(..., interval=)|.
 \end{itemize}
 \end{tcolorbox}
 
@@ -463,9 +888,15 @@ plot(fitted(fit), rvf); abline(h=0)
 
 \begin{tcolorbox}[colback=SoftBg,colframe=Accent!40!black,breakable,boxrule=0.5pt,arc=2mm]
 \begin{itemize}
-  \item Do two lectures per day ($\approx$30--45 min each) for five days.
-  \item The next week, re-do only the Active Recall for each lecture and one Micro Practice per topic.
-  \item Keep a one-page ``error log'': copy only your mistakes and how to avoid them next time.
+  \item \textbf{Week 1 (catch-up):} two lectures per day (about 35--45 min each).
+  \begin{itemize}
+    \item For each lecture: 6 min Core skim $\rightarrow$ 5 min Active Recall (eyes off) $\rightarrow$ 8--10 min Micro Practice $\rightarrow$ 5--8 min R Mini-Kit.
+    \item End of day: 15 min mixed recall (pick 6--8 questions across the day's lectures).
+  \end{itemize}
+  \item \textbf{Week 2 (consolidate):} revisit each lecture on Day 2 and Day 7; do only Active Recall plus one Micro Practice. Tick the review boxes: Day 0 / 2 / 7 / 14.
+  \item \textbf{Error log protocol:} when you miss an item, write the reason and a fix in a one-page sheet you see daily.
+  \item \textbf{R reps:} once per day, retype one Mini-Kit from memory (no copy-paste) to keep commands fluent.
+  \item \textbf{Exam warm-up:} 3 blocks $\times$ 30 MCQs under time; after each block, classify errors (concept vs slip) and fix with one targeted Micro Practice.
 \end{itemize}
 \end{tcolorbox}
 
