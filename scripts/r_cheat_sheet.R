@@ -19,18 +19,18 @@ median(x)                                 # median
 #### PROBABILITY DISTRIBUTIONS ####
 
 # Normal distribution (Z ~ N(0,1))
-pnorm(q)                                  # Pr(Z ≤ q)
-pnorm(q, mean=μ, sd=σ)                    # Pr(Y ≤ q) for Y~N(μ,σ)
+pnorm(q)                                  # Pr(Z ≤ q)  lower.tail = TRUE
+pnorm(q, mean=μ, sd=σ)                    # Pr(Y ≤ q) for Y~N(μ,σ)  lower.tail = TRUE
 qnorm(p)                                  # quantile (inverse cdf) of Z
 qnorm(p, mean=μ, sd=σ)                    # quantile of Y~N(μ,σ)
 
 # t-distribution
-pt(t, df)                                 # Pr(T ≤ t) for T~t_df
+pt(t, df)                                 # Pr(T ≤ t) for T~t_df, lower.tail = TRUE
 qt(p, df)                                 # t-quantile for given tail p
 
 # Binomial distribution
 dbinom(x, size=n, prob=π)                 # Pr(X = x)
-pbinom(q, size=n, prob=π)                 # Pr(X ≤ q)
+pbinom(q, size=n, prob=π)                 # Pr(X ≤ q) lower.tail = TRUE
 rbinom(n, size=k, prob=π)                 # simulate n binomials
 
 #### CONFIDENCE INTERVALS & HYPOTHESIS TESTS ####
@@ -98,10 +98,10 @@ a1  <- aov(y ~ group, data = df)     # Same syntax as lm()
 TukeyHSD(a1)                         # Pairwise CIs / pvals, controls FWER
 
 ## ── Distribution helpers (critical values & p-values) ────────────────────────
-pnorm(z)            # Φ(z): P(Z ≤ z) for Z ~ N(0,1)
+pnorm(z)            # Φ(z): P(Z ≤ z) for Z ~ N(0,1)  lower.tail = TRUE
 qnorm(p)            # z_p  : inverse of Φ
-pchisq(q, df)       # P(Χ² ≤ q) 
-pf(F, df1, df2)     # P(F_{df1,df2} ≤ F)
+pchisq(q, df)       # P(Χ² ≤ q)   lower.tail = TRUE
+pf(F, df1, df2)     # P(F_{df1,df2} ≤ F)  lower.tail = TRUE
 ## ── Simulation snippets (great for intuition checks) ─────────────────────────
 set.seed(123)                       # Reproducibility is king
 x <- rnorm(1000, mean = 0, sd = 1)  # Normal draws for CLT demos
